@@ -1,0 +1,17 @@
+{
+  "name": "RemCard — цифровая карта пациента",
+  "short_name": "RemCard",
+  "description": "Презентационный сайт open-source приложения RemCard для реанимации и операционного блока.",
+  "lang": "ru",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#081018",
+  "theme_color": "#081018",
+  "icons": [
+    {
+      "src": "/remcardicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
