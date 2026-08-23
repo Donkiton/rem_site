@@ -29,5 +29,5 @@ export const technologies = [
   { name: "pytest", icon: "pytest" as TechnologyIconName, description: "Автоматические тесты" },
   { name: "Windows", icon: "windows" as TechnologyIconName, description: "Основная проверяемая платформа" },
   { name: "GitHub", icon: "github" as TechnologyIconName, description: "Открытая разработка и история изменений" },
-  { name: "MIT License", icon: "license" as TechnologyIconName, description: "Открытая лицензия исходного кода" },
+  { name: "RemCard Source License", icon: "license" as TechnologyIconName, description: "Некоммерческое использование физическими лицами" },
 ] as const;

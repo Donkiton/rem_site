@@ -13,7 +13,7 @@ const navigation = [
   { label: "Интерфейс", href: "#interface", id: "interface" },
   { label: "Для кого", href: "#roles", id: "roles" },
   { label: "Как устроено", href: "#architecture", id: "architecture" },
-  { label: "Open source", href: "#open-source", id: "open-source" },
+  { label: "Исходный код", href: "#open-source", id: "open-source" },
   { label: "Документация", href: PROJECT_LINKS.documentation, external: true },
   { label: "FAQ", href: "#faq", id: "faq" },
 ] as const;
@@ -87,7 +87,7 @@ export function MobileNavigation({
         <div className="mobile-nav-head">
           <a className="brand" href="#top" onClick={onClose}>
             <Image src="/remcardicon.png" alt="" width={36} height={36} unoptimized />
-            <span>RemCard</span>
+            <span>RemCard ICU</span>
           </a>
           <IconButton aria-label="Закрыть меню" onClick={onClose}>
             <X aria-hidden="true" />
@@ -153,9 +153,9 @@ export function Header() {
     <>
       <header className={cx("site-header", scrolled && "site-header-scrolled")}>
         <div className="header-inner">
-          <a className="brand" href="#top" aria-label="RemCard — на главную">
+          <a className="brand" href="#top" aria-label="RemCard ICU — на главную">
             <Image src="/remcardicon.png" alt="" width={38} height={38} priority unoptimized />
-            <span>RemCard</span>
+            <span>RemCard ICU</span>
           </a>
           <nav className="desktop-navigation" aria-label="Основная навигация">
             {navigation.map((item) => (

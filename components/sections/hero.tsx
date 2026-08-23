@@ -38,10 +38,10 @@ export function Hero() {
       <div className="hero-glow hero-glow-two" aria-hidden="true" />
       <div className="site-container hero-layout">
         <div className="hero-copy">
-          <StatusBadge tone="success">Открытый исходный код · Windows · Активная разработка</StatusBadge>
-          <h1 id="hero-title">Цифровая карта пациента для реанимации и операционного блока</h1>
+          <StatusBadge tone="success">Доступный исходный код · Windows · Активная разработка</StatusBadge>
+          <h1 id="hero-title">RemCard ICU — электронная реанимационная карта</h1>
           <p className="hero-description">
-            RemCard объединяет назначения, жизненно важные показатели, инфузионную терапию, ИВЛ,
+            Приложение RemCard объединяет назначения, жизненно важные показатели, инфузионную терапию, ИВЛ,
             процедуры, лабораторные исследования, события операции и документы в едином рабочем
             пространстве.
           </p>
@@ -60,7 +60,7 @@ export function Hero() {
             <span>Локальная сеть</span>
             <span>SQLite</span>
             <span>Ролевые интерфейсы</span>
-            <span>MIT License</span>
+            <span>Source-available</span>
           </div>
         </div>
 

@@ -28,9 +28,9 @@ const jetBrainsMono = localFont({
   preload: false,
 });
 
-const title = "RemCard — цифровая карта пациента для реанимации и операционного блока";
+const title = "RemCard ICU — электронная реанимационная карта для ОРИТ и операционного блока";
 const description =
-  "Open-source Windows-приложение для ведения пациента в реанимации и операционном блоке: назначения, витальные показатели, инфузии, ИВЛ, процедуры, анализы и документы.";
+  "Windows-приложение с доступным исходным кодом для ведения пациента в реанимации и операционном блоке: назначения, витальные показатели, инфузии, ИВЛ, процедуры, анализы и документы.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = await resolveSiteUrl();
@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: siteUrl,
     title,
     description,
-    applicationName: "RemCard",
+    applicationName: "RemCard ICU",
     alternates: { canonical: siteUrl },
     manifest: "/manifest.webmanifest",
     icons: {
@@ -51,10 +51,10 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "ru_RU",
       url: siteUrl,
-      siteName: "RemCard",
+      siteName: "RemCard ICU",
       title,
       description,
-      images: [{ url: ogImage, width: 1729, height: 910, alt: "RemCard — цифровая карта пациента" }],
+      images: [{ url: ogImage, width: 1729, height: 910, alt: "RemCard ICU — электронная реанимационная карта" }],
     },
     twitter: {
       card: "summary_large_image",

@@ -15,17 +15,17 @@ async function render() {
   );
 }
 
-test("сервер отдаёт русскую презентационную страницу RemCard", async () => {
+test("сервер отдаёт русскую презентационную страницу RemCard ICU", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
   assert.match(html, /<html[^>]*lang=["']ru["']/i);
-  assert.match(html, /<title>RemCard — цифровая карта пациента/);
-  assert.match(html, /Цифровая карта пациента для реанимации и операционного блока/);
-  assert.match(html, /Что такое RemCard/);
-  assert.match(html, /RemCard развивается открыто/);
+  assert.match(html, /<title>RemCard ICU — электронная реанимационная карта/);
+  assert.match(html, /RemCard ICU — электронная реанимационная карта/);
+  assert.match(html, /Что такое RemCard ICU/);
+  assert.match(html, /RemCard развивается публично/);
   assert.match(html, /Экспериментальный проект требует независимой проверки/);
   assert.match(html, /application\/ld\+json/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/);
