@@ -1,10 +1,11 @@
 import { cx } from "@/lib/utils";
+import type { ReactNode } from "react";
 
 type SectionHeadingProps = {
   id?: string;
   eyebrow?: string;
   title: string;
-  description?: string;
+  description?: ReactNode;
   align?: "left" | "center";
   className?: string;
 };

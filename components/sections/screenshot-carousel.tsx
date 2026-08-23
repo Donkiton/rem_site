@@ -11,7 +11,7 @@ import { IconButton } from "@/components/ui/buttons";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/animations/reveal";
 import { cx } from "@/lib/utils";
-import { PROJECT_VERSION } from "@/lib/project-version";
+import { ProjectVersionValue } from "@/components/project-version-provider";
 
 const ScreenshotLightbox = dynamic(
   () => import("./screenshot-lightbox").then((module) => module.ScreenshotLightbox),
@@ -57,7 +57,13 @@ export function ScreenshotCarousel() {
               id="gallery-title"
               eyebrow="Настоящий интерфейс"
               title="Посмотрите, как RemCard выглядит в работе"
-              description={`Пять экранов показывают разные роли и этапы. Все снимки сделаны в версии 4.1.1 на временных базах с демонстрационными данными; текущая версия проекта — ${PROJECT_VERSION}.`}
+              description={
+                <>
+                  Пять экранов показывают разные роли и этапы. Все снимки сделаны в версии 4.1.1
+                  на временных базах с демонстрационными данными; текущая версия проекта —{" "}
+                  <ProjectVersionValue />.
+                </>
+              }
             />
             <div className="carousel-controls">
               <IconButton aria-label="Предыдущий экран" onClick={() => api?.scrollPrev(Boolean(reduceMotion))}>

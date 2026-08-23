@@ -22,7 +22,7 @@ import {
 import { roles } from "@/content/roles";
 import { roadmap, type RoadmapStatus } from "@/content/roadmap";
 import { technologies } from "@/content/site";
-import type { GitHubMetrics } from "@/lib/github";
+import type { GitHubMetrics, GitHubReleaseInfo } from "@/lib/github";
 import { PROJECT_LINKS } from "@/lib/links";
 import { Reveal, RevealGroup, RevealItem } from "@/components/animations/reveal";
 import { RoleCard } from "@/components/ui/cards";
@@ -190,7 +190,19 @@ export function TechnologiesSection() {
   );
 }
 
-export function OpenSourceSection({ metrics }: { metrics: GitHubMetrics }) {
+export function OpenSourceSection({
+  metrics,
+  release,
+}: {
+  metrics: GitHubMetrics;
+  release: GitHubReleaseInfo | null;
+}) {
+  const releaseUrl = release?.url ?? PROJECT_LINKS.releases;
+  const releaseLabel = release?.prerelease
+    ? `Открыть тестовую Windows-версию ${release.version}`
+    : release
+      ? `Скачать Windows-релиз ${release.version}`
+      : "Открыть Windows-релизы";
   return (
     <section id="open-source" className="section open-source-section" aria-labelledby="open-source-title">
       <div className="site-container open-source-layout">
@@ -209,7 +221,7 @@ export function OpenSourceSection({ metrics }: { metrics: GitHubMetrics }) {
             <GhostButton href={PROJECT_LINKS.documentation} external><BookOpen size={17} aria-hidden="true" />Посмотреть документацию</GhostButton>
             <GhostButton href={PROJECT_LINKS.changelog} external><History size={17} aria-hidden="true" />История изменений</GhostButton>
           </div>
-          <a className="release-link" href={PROJECT_LINKS.releases} target="_blank" rel="noreferrer"><FileClock aria-hidden="true" />Скачать первый публичный Windows-релиз <span aria-hidden="true">↗</span></a>
+          <a className="release-link" href={releaseUrl} target="_blank" rel="noreferrer"><FileClock aria-hidden="true" />{releaseLabel} <span aria-hidden="true">↗</span></a>
         </Reveal>
         <Reveal delay={0.1}><GitHubCard metrics={metrics} /></Reveal>
       </div>
