@@ -42,6 +42,7 @@ export function generateMetadata(): Metadata {
     description,
     applicationName: "RemCard ICU",
     alternates: { canonical: canonicalUrl },
+    other: { "yandex-verification": "1b90a7ca5c672df1" },
     manifest: withBasePath("/manifest.webmanifest"),
     icons: {
       icon: [
