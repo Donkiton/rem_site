@@ -58,7 +58,7 @@ export function IntroSection() {
       <div className="site-container">
         <Reveal>
           <div className="intro-lead">
-            <SectionHeading id="intro-title" eyebrow="О проекте" title="Что такое RemCard" />
+            <SectionHeading id="intro-title" eyebrow="О проекте" title="Что такое RemCard ICU" />
             <p>
               RemCard — настольное приложение для ведения пациента в отделении реанимации и во
               время операции. Врач, медицинская сестра и персонал операционного блока работают с
@@ -195,12 +195,12 @@ export function OpenSourceSection({ metrics }: { metrics: GitHubMetrics }) {
     <section id="open-source" className="section open-source-section" aria-labelledby="open-source-title">
       <div className="site-container open-source-layout">
         <Reveal className="open-source-copy">
-          <StatusBadge tone="success"><Code2 size={14} aria-hidden="true" />MIT License · открытый код</StatusBadge>
+          <StatusBadge tone="success"><Code2 size={14} aria-hidden="true" />RemCard Source License · доступный код</StatusBadge>
           <SectionHeading
             id="open-source-title"
-            eyebrow="Open source"
-            title="RemCard развивается открыто"
-            description="Исходный код проекта доступен на GitHub. Разработчики и медицинские специалисты могут изучать архитектуру, сообщать об ошибках, предлагать улучшения интерфейса, дополнять документацию и участвовать в тестировании."
+            eyebrow="Исходный код"
+            title="RemCard развивается публично"
+            description="Исходный код доступен на GitHub по RemCard Proprietary Source License 1.1. Физические лица могут изучать, изменять и использовать проект некоммерчески; организационное и коммерческое использование требует письменного разрешения."
           />
           <div className="open-source-actions">
             <PrimaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />Поставить звезду</PrimaryButton>
@@ -221,7 +221,7 @@ export function StorySection() {
   return (
     <section id="story" className="section story-section" aria-labelledby="story-title">
       <div className="site-container story-layout">
-        <Reveal className="story-mark"><HeartHandshake aria-hidden="true" /><span>Практическая задача<br />стала открытым проектом</span></Reveal>
+        <Reveal className="story-mark"><HeartHandshake aria-hidden="true" /><span>Практическая задача<br />стала публичным проектом</span></Reveal>
         <Reveal className="story-copy" delay={0.06}>
           <SectionHeading id="story-title" eyebrow="История проекта" title="Создан из реального рабочего контекста" />
           <blockquote>
@@ -272,7 +272,7 @@ export function FinalCTASection() {
         <Reveal className="final-cta-copy">
           <span className="final-cta-icon" aria-hidden="true"><Sparkles /></span>
           <h2 id="final-cta-title">Помогите сделать инструменты для реанимации удобнее</h2>
-          <p>RemCard развивается как открытый проект. Звезда на GitHub, сообщение об ошибке, предложение врача или вклад разработчика помогают проекту становиться устойчивее и понятнее.</p>
+          <p>RemCard развивается как публичный source-available проект. Звезда на GitHub, сообщение об ошибке, предложение врача или вклад разработчика помогают проекту становиться устойчивее и понятнее.</p>
           <div className="final-cta-actions">
             <PrimaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />Открыть RemCard на GitHub</PrimaryButton>
             <SecondaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />Поставить звезду</SecondaryButton>

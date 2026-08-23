@@ -1,7 +1,7 @@
 {
-  "name": "RemCard — цифровая карта пациента",
-  "short_name": "RemCard",
-  "description": "Презентационный сайт open-source приложения RemCard для реанимации и операционного блока.",
+  "name": "RemCard ICU — электронная реанимационная карта",
+  "short_name": "RemCard ICU",
+  "description": "Презентационный сайт приложения RemCard ICU с доступным исходным кодом для реанимации и операционного блока.",
   "lang": "ru",
   "start_url": "/",
   "display": "standalone",

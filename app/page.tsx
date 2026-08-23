@@ -27,18 +27,17 @@ export default async function Home() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "RemCard",
-    alternateName: "Рем Карта",
+    name: "RemCard ICU",
+    alternateName: ["RemCard", "Рем Карта"],
     applicationCategory: "DesktopApplication",
     operatingSystem: "Windows",
     softwareVersion: PROJECT_VERSION,
     description:
-      "Экспериментальное open-source приложение для процессов реанимации и операционного блока.",
+      "Экспериментальное приложение с доступным исходным кодом для процессов реанимации и операционного блока.",
     url: PROJECT_LINKS.repository,
     downloadUrl: PROJECT_LINKS.releases,
     codeRepository: PROJECT_LINKS.repository,
     license: PROJECT_LINKS.license,
-    isAccessibleForFree: true,
   };
 
   return (
