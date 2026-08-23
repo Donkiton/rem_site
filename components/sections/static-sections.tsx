@@ -1,6 +1,7 @@
 import {
   Activity,
   ArrowDown,
+  ArrowRight,
   BookOpen,
   Boxes,
   CheckCircle2,
@@ -34,6 +35,7 @@ import { TechnologyBadge } from "@/components/ui/technology-badge";
 import { WarningPanel } from "@/components/ui/warning-panel";
 import { ContactForm } from "@/components/sections/contact-form";
 import { GithubMark } from "@/components/icons/github-mark";
+import { withBasePath } from "@/lib/site-url";
 
 export function IntroSection() {
   const cards = [
@@ -79,6 +81,39 @@ export function IntroSection() {
               </RevealItem>
             );
           })}
+        </RevealGroup>
+      </div>
+    </section>
+  );
+}
+
+export function SeoDirectorySection() {
+  const pages = [
+    { title: "Электронная реанимационная карта", text: "Пациент, назначения, показатели, процедуры и документы в одном рабочем контуре.", href: withBasePath("/elektronnaya-reanimacionnaya-karta/") },
+    { title: "Программа для ОРИТ", text: "Локальный Windows-сценарий для врача и медицинской сестры отделения реанимации.", href: withBasePath("/programma-dlya-orit/") },
+    { title: "Операционный блок", text: "Регистрация операции и связанная история пациента от начала до завершения случая.", href: withBasePath("/operacionnyj-blok/") },
+  ];
+  return (
+    <section className="section seo-directory-section" aria-labelledby="seo-directory-title">
+      <div className="site-container">
+        <Reveal>
+          <SectionHeading
+            id="seo-directory-title"
+            eyebrow="О RemCard ICU"
+            title="Выберите рабочий сценарий"
+            description="Отдельные страницы помогают быстро разобраться, подходит ли проект для конкретной задачи отделения."
+          />
+        </Reveal>
+        <RevealGroup className="seo-directory-grid">
+          {pages.map((page) => (
+            <RevealItem key={page.href}>
+              <a className="seo-directory-card" href={page.href}>
+                <h3>{page.title}</h3>
+                <p>{page.text}</p>
+                <span>Подробнее <ArrowRight aria-hidden="true" /></span>
+              </a>
+            </RevealItem>
+          ))}
         </RevealGroup>
       </div>
     </section>

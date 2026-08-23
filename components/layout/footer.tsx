@@ -18,7 +18,7 @@ export function Footer({ releaseUrl }: { releaseUrl: string }) {
     <footer className="site-footer">
       <div className="site-container footer-grid">
         <div className="footer-brand">
-          <a className="brand" href="#top"><Image src={withBasePath("/remcardicon.png")} alt="" width={44} height={44} unoptimized /><span>RemCard ICU</span></a>
+          <a className="brand" href={withBasePath("/")}><Image src={withBasePath("/remcardicon.png")} alt="" width={44} height={44} unoptimized /><span>RemCard ICU</span></a>
           <p>Windows-приложение с доступным исходным кодом для процессов реанимации и операционного блока.</p>
           <span className="footer-version">Версия <ProjectVersionValue /></span>
         </div>
@@ -35,7 +35,7 @@ export function Footer({ releaseUrl }: { releaseUrl: string }) {
       </div>
       <div className="site-container footer-bottom">
         <p>RemCard ICU — экспериментальный source-available проект. Некоммерческое использование физическими лицами разрешено; организационное и коммерческое использование требует письменного разрешения.</p>
-        <a href="#top">Наверх ↑</a>
+        <a href={withBasePath("/")}>На главную ↑</a>
       </div>
     </footer>
   );

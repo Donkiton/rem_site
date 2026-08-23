@@ -12,6 +12,9 @@ test("статическая сборка содержит русскую пре
   assert.match(html, /<title>RemCard ICU — электронная реанимационная карта/);
   assert.match(html, /RemCard ICU — электронная реанимационная карта/);
   assert.match(html, /Что такое RemCard ICU/);
+  assert.match(html, /Электронная реанимационная карта/);
+  assert.match(html, /Программа для ОРИТ/);
+  assert.match(html, /Операционный блок/);
   assert.match(html, /RemCard развивается публично/);
   assert.match(html, /Единый центр архива/);
   assert.match(html, /текущая версия проекта —(?:<!-- -->|\s)*\d+\.\d+\.\d+/);
@@ -42,4 +45,7 @@ test("SEO-файлы указывают на публичный GitHub Pages URL
   ]);
   assert.match(robots, /https:\/\/donkiton\.github\.io\/rem_site\/sitemap\.xml/);
   assert.match(sitemap, /https:\/\/donkiton\.github\.io\/rem_site\/?/);
+  assert.match(sitemap, /elektronnaya-reanimacionnaya-karta/);
+  assert.match(sitemap, /programma-dlya-orit/);
+  assert.match(sitemap, /operacionnyj-blok/);
 });

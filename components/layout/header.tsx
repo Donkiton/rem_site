@@ -10,13 +10,13 @@ import { GithubMark } from "@/components/icons/github-mark";
 import { withBasePath } from "@/lib/site-url";
 
 const navigation = [
-  { label: "Возможности", href: "#features", id: "features" },
-  { label: "Интерфейс", href: "#interface", id: "interface" },
-  { label: "Для кого", href: "#roles", id: "roles" },
-  { label: "Как устроено", href: "#architecture", id: "architecture" },
-  { label: "Исходный код", href: "#open-source", id: "open-source" },
+  { label: "Возможности", href: withBasePath("/#features"), id: "features" },
+  { label: "Интерфейс", href: withBasePath("/#interface"), id: "interface" },
+  { label: "Для кого", href: withBasePath("/#roles"), id: "roles" },
+  { label: "Как устроено", href: withBasePath("/#architecture"), id: "architecture" },
+  { label: "Исходный код", href: withBasePath("/#open-source"), id: "open-source" },
   { label: "Документация", href: PROJECT_LINKS.documentation, external: true },
-  { label: "FAQ", href: "#faq", id: "faq" },
+  { label: "FAQ", href: withBasePath("/#faq"), id: "faq" },
 ] as const;
 
 export function MobileNavigation({
@@ -86,7 +86,7 @@ export function MobileNavigation({
       <button className="mobile-nav-backdrop" type="button" tabIndex={-1} aria-hidden="true" onClick={onClose} />
       <div ref={panelRef} className="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Навигация">
         <div className="mobile-nav-head">
-          <a className="brand" href="#top" onClick={onClose}>
+          <a className="brand" href={withBasePath("/")} onClick={onClose}>
             <Image src={withBasePath("/remcardicon.png")} alt="" width={36} height={36} unoptimized />
             <span>RemCard ICU</span>
           </a>
@@ -112,7 +112,7 @@ export function MobileNavigation({
             <GithubMark width={17} height={17} aria-hidden="true" />
             Открыть GitHub
           </PrimaryButton>
-          <SecondaryButton href="#interface" onClick={onClose}>
+          <SecondaryButton href={withBasePath("/#interface")} onClick={onClose}>
             Посмотреть интерфейс
           </SecondaryButton>
         </div>
@@ -154,7 +154,7 @@ export function Header() {
     <>
       <header className={cx("site-header", scrolled && "site-header-scrolled")}>
         <div className="header-inner">
-          <a className="brand" href="#top" aria-label="RemCard ICU — на главную">
+          <a className="brand" href={withBasePath("/")} aria-label="RemCard ICU — на главную">
             <Image src={withBasePath("/remcardicon.png")} alt="" width={38} height={38} priority unoptimized />
             <span>RemCard ICU</span>
           </a>
@@ -173,7 +173,7 @@ export function Header() {
             ))}
           </nav>
           <div className="header-actions">
-            <SecondaryButton className="interface-header-button" href="#interface">
+            <SecondaryButton className="interface-header-button" href={withBasePath("/#interface")}>
               Интерфейс
             </SecondaryButton>
             <PrimaryButton href={PROJECT_LINKS.repository} external>

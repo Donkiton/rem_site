@@ -11,6 +11,7 @@ import {
   OpenSourceSection,
   RoadmapSection,
   RolesSection,
+  SeoDirectorySection,
   SafetySection,
   StorySection,
   TechnologiesSection,
@@ -53,6 +54,7 @@ export default async function Home() {
       <main id="main-content">
         <Hero />
         <IntroSection />
+        <SeoDirectorySection />
         <ComparisonSection />
         <RolesSection />
         <FeatureCarousel />
