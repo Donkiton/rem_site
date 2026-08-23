@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { Mail } from "lucide-react";
 import { PROJECT_LINKS } from "@/lib/links";
-import { PROJECT_VERSION } from "@/lib/project-version";
 import { GithubMark } from "@/components/icons/github-mark";
 import { withBasePath } from "@/lib/site-url";
+import { ProjectVersionValue } from "@/components/project-version-provider";
 
-export function Footer() {
+export function Footer({ releaseUrl }: { releaseUrl: string }) {
   const links = [
     ["GitHub", PROJECT_LINKS.repository],
     ["Документация", PROJECT_LINKS.documentation],
     ["Issues", PROJECT_LINKS.issues],
     ["Changelog", PROJECT_LINKS.changelog],
     ["License", PROJECT_LINKS.license],
-    ["Windows-релиз", PROJECT_LINKS.releases],
+    ["Windows-релиз", releaseUrl],
   ] as const;
   return (
     <footer className="site-footer">
@@ -20,7 +20,7 @@ export function Footer() {
         <div className="footer-brand">
           <a className="brand" href="#top"><Image src={withBasePath("/remcardicon.png")} alt="" width={44} height={44} unoptimized /><span>RemCard ICU</span></a>
           <p>Windows-приложение с доступным исходным кодом для процессов реанимации и операционного блока.</p>
-          <span className="footer-version">Версия {PROJECT_VERSION}</span>
+          <span className="footer-version">Версия <ProjectVersionValue /></span>
         </div>
         <nav aria-label="Ссылки проекта">
           <h2>Проект</h2>

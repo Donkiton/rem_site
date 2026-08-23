@@ -1,5 +1,4 @@
 import { PROJECT_LINKS } from "@/lib/links";
-import { PROJECT_VERSION } from "@/lib/project-version";
 
 export const faqItems = [
   {
@@ -30,7 +29,7 @@ export const faqItems = [
   {
     question: "Можно ли скачать готовую программу?",
     answer:
-      `Да. Для версии ${PROJECT_VERSION} опубликован первый Windows-релиз. Перед запуском изучите описание релиза и экспериментальный статус проекта.`,
+      "Да. Доступные Windows-сборки публикуются в GitHub Releases. Перед запуском изучите описание конкретного релиза, его статус и предупреждения по установке.",
     link: {
       label: "Открыть GitHub Releases",
       href: PROJECT_LINKS.releases,

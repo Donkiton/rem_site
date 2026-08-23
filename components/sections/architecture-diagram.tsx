@@ -15,6 +15,8 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/animations/reveal";
 import { cx } from "@/lib/utils";
 import { withBasePath } from "@/lib/site-url";
+import { PROJECT_LINKS } from "@/lib/links";
+import { SecondaryButton } from "@/components/ui/buttons";
 
 const roleNodes = [
   { id: "doctor", label: "Врач", icon: BriefcaseMedical, detail: "Карта, назначения и отчёты" },
@@ -109,6 +111,10 @@ export function ArchitectureDiagram() {
               транзакционно; сетевой профиль, резервное копирование и восстановление относятся к
               зонам повышенного риска и описаны в документации проекта.
             </p>
+            <SecondaryButton href={PROJECT_LINKS.codemap} external>
+              <Layers3 size={17} aria-hidden="true" />
+              Открыть интерактивную карту архитектуры
+            </SecondaryButton>
           </div>
         </details>
       </div>

@@ -13,6 +13,10 @@ test("статическая сборка содержит русскую пре
   assert.match(html, /RemCard ICU — электронная реанимационная карта/);
   assert.match(html, /Что такое RemCard ICU/);
   assert.match(html, /RemCard развивается публично/);
+  assert.match(html, /Единый центр архива/);
+  assert.match(html, /текущая версия проекта —(?:<!-- -->|\s)*\d+\.\d+\.\d+/);
+  assert.match(html, /softwareVersion\\?"?:\\?"\d+\.\d+\.\d+/);
+  assert.doesNotMatch(html, /текущая версия проекта —(?:<!-- -->|\s)*4\.1\.2/);
   assert.match(html, /Экспериментальный проект требует независимой проверки/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /rel="canonical" href="https:\/\/donkiton\.github\.io\/rem_site\/"/);
@@ -26,6 +30,7 @@ test("ключевые разделы и ссылки присутствуют �
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
   assert.match(html, /https:\/\/github\.com\/Donkiton\/rem_card/);
+  assert.match(html, /https:\/\/donkiton\.github\.io\/rem_card\/codemap\/codemap\.html/);
   assert.match(html, /mailto:menfise%40mail\.ru|mailto:menfise@mail\.ru/);
   assert.ok(html.includes(`${basePath}/images/remcard/remcard-real-screenshot.png`));
 });

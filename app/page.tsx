@@ -18,12 +18,18 @@ import {
 import { Timeline } from "@/components/sections/timeline";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
-import { getGitHubMetrics } from "@/lib/github";
+import { getGitHubMetrics, getLatestGitHubRelease } from "@/lib/github";
 import { PROJECT_LINKS } from "@/lib/links";
-import { PROJECT_VERSION } from "@/lib/project-version";
+import { getProjectVersion } from "@/lib/project-version";
+import { ProjectVersionProvider } from "@/components/project-version-provider";
 
 export default async function Home() {
-  const metrics = await getGitHubMetrics();
+  const [metrics, release, projectVersion] = await Promise.all([
+    getGitHubMetrics(),
+    getLatestGitHubRelease(),
+    getProjectVersion(),
+  ]);
+  const releaseUrl = release?.url ?? PROJECT_LINKS.releases;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -31,17 +37,17 @@ export default async function Home() {
     alternateName: ["RemCard", "Рем Карта"],
     applicationCategory: "DesktopApplication",
     operatingSystem: "Windows",
-    softwareVersion: PROJECT_VERSION,
+    softwareVersion: projectVersion,
     description:
       "Экспериментальное приложение с доступным исходным кодом для процессов реанимации и операционного блока.",
     url: PROJECT_LINKS.repository,
-    downloadUrl: PROJECT_LINKS.releases,
+    downloadUrl: release?.downloadUrl ?? releaseUrl,
     codeRepository: PROJECT_LINKS.repository,
     license: PROJECT_LINKS.license,
   };
 
   return (
-    <>
+    <ProjectVersionProvider initialVersion={projectVersion}>
       <a className="skip-link" href="#main-content">Перейти к содержимому</a>
       <Header />
       <main id="main-content">
@@ -56,17 +62,17 @@ export default async function Home() {
         <LocalNetworkSection />
         <SafetySection />
         <TechnologiesSection />
-        <OpenSourceSection metrics={metrics} />
+        <OpenSourceSection metrics={metrics} release={release} />
         <StorySection />
         <RoadmapSection />
         <FAQAccordion />
         <FinalCTASection />
       </main>
-      <Footer />
+      <Footer releaseUrl={releaseUrl} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
       />
-    </>
+    </ProjectVersionProvider>
   );
 }
