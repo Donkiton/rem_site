@@ -8,6 +8,7 @@ import { PrimaryButton, SecondaryButton, GhostButton } from "@/components/ui/but
 import { StatusBadge } from "@/components/ui/status-badge";
 import { PROJECT_LINKS } from "@/lib/links";
 import { GithubMark } from "@/components/icons/github-mark";
+import { withBasePath } from "@/lib/site-url";
 
 const vitals = [
   { label: "ЧСС", value: "78", unit: "уд/мин", tone: "red" },
@@ -82,7 +83,7 @@ export function Hero() {
             </div>
             <Image
               className="hero-screenshot"
-              src="/images/remcard/remcard-real-screenshot.png"
+              src={withBasePath("/images/remcard/remcard-real-screenshot.png")}
               alt="Главный экран RemCard со списком тестовых пациентов"
               width={1920}
               height={1040}
