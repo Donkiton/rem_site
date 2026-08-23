@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 import { resolveSiteUrl } from "@/lib/site-url";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = (await resolveSiteUrl()).toString().replace(/\/$/, "");
+export const dynamic = "force-static";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = resolveSiteUrl().toString().replace(/\/$/, "");
   return [{ url: baseUrl, changeFrequency: "weekly", priority: 1 }];
 }

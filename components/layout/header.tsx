@@ -7,6 +7,7 @@ import { PROJECT_LINKS } from "@/lib/links";
 import { cx } from "@/lib/utils";
 import { IconButton, PrimaryButton, SecondaryButton } from "@/components/ui/buttons";
 import { GithubMark } from "@/components/icons/github-mark";
+import { withBasePath } from "@/lib/site-url";
 
 const navigation = [
   { label: "Возможности", href: "#features", id: "features" },
@@ -86,7 +87,7 @@ export function MobileNavigation({
       <div ref={panelRef} className="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Навигация">
         <div className="mobile-nav-head">
           <a className="brand" href="#top" onClick={onClose}>
-            <Image src="/remcardicon.png" alt="" width={36} height={36} unoptimized />
+            <Image src={withBasePath("/remcardicon.png")} alt="" width={36} height={36} unoptimized />
             <span>RemCard ICU</span>
           </a>
           <IconButton aria-label="Закрыть меню" onClick={onClose}>
@@ -154,7 +155,7 @@ export function Header() {
       <header className={cx("site-header", scrolled && "site-header-scrolled")}>
         <div className="header-inner">
           <a className="brand" href="#top" aria-label="RemCard ICU — на главную">
-            <Image src="/remcardicon.png" alt="" width={38} height={38} priority unoptimized />
+            <Image src={withBasePath("/remcardicon.png")} alt="" width={38} height={38} priority unoptimized />
             <span>RemCard ICU</span>
           </a>
           <nav className="desktop-navigation" aria-label="Основная навигация">

@@ -3,6 +3,7 @@ import { Mail } from "lucide-react";
 import { PROJECT_LINKS } from "@/lib/links";
 import { PROJECT_VERSION } from "@/lib/project-version";
 import { GithubMark } from "@/components/icons/github-mark";
+import { withBasePath } from "@/lib/site-url";
 
 export function Footer() {
   const links = [
@@ -17,7 +18,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="site-container footer-grid">
         <div className="footer-brand">
-          <a className="brand" href="#top"><Image src="/remcardicon.png" alt="" width={44} height={44} unoptimized /><span>RemCard ICU</span></a>
+          <a className="brand" href="#top"><Image src={withBasePath("/remcardicon.png")} alt="" width={44} height={44} unoptimized /><span>RemCard ICU</span></a>
           <p>Windows-приложение с доступным исходным кодом для процессов реанимации и операционного блока.</p>
           <span className="footer-version">Версия {PROJECT_VERSION}</span>
         </div>

@@ -14,6 +14,7 @@ import {
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/animations/reveal";
 import { cx } from "@/lib/utils";
+import { withBasePath } from "@/lib/site-url";
 
 const roleNodes = [
   { id: "doctor", label: "Врач", icon: BriefcaseMedical, detail: "Карта, назначения и отчёты" },
@@ -81,7 +82,7 @@ export function ArchitectureDiagram() {
           <Reveal className="architecture-reference" delay={0.08}>
             <div className="workflow-image-frame">
               <Image
-                src="/images/remcard/remcard-workflow.svg"
+                src={withBasePath("/images/remcard/remcard-workflow.svg")}
                 alt="Схема взаимодействия рабочих мест RemCard с общей папкой данных"
                 width={1400}
                 height={850}

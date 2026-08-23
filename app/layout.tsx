@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { resolveSiteUrl } from "@/lib/site-url";
+import { resolveSiteUrl, withBasePath } from "@/lib/site-url";
 import "./globals.css";
 
 const manrope = localFont({
@@ -32,20 +32,24 @@ const title = "RemCard ICU — электронная реанимационна
 const description =
   "Windows-приложение с доступным исходным кодом для ведения пациента в реанимации и операционном блоке: назначения, витальные показатели, инфузии, ИВЛ, процедуры, анализы и документы.";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const siteUrl = await resolveSiteUrl();
-  const ogImage = new URL("/og.png", siteUrl).toString();
+export function generateMetadata(): Metadata {
+  const siteUrl = resolveSiteUrl();
+  const canonicalUrl = siteUrl.toString();
+  const ogImage = new URL(withBasePath("/og.png"), siteUrl.origin).toString();
   return {
-    metadataBase: siteUrl,
+    metadataBase: new URL(siteUrl.origin),
     title,
     description,
     applicationName: "RemCard ICU",
-    alternates: { canonical: siteUrl },
-    manifest: "/manifest.webmanifest",
+    alternates: { canonical: canonicalUrl },
+    manifest: withBasePath("/manifest.webmanifest"),
     icons: {
-      icon: [{ url: "/favicon.ico" }, { url: "/remcardicon.png", type: "image/png" }],
-      shortcut: "/favicon.ico",
-      apple: "/remcardicon.png",
+      icon: [
+        { url: withBasePath("/favicon.ico") },
+        { url: withBasePath("/remcardicon.png"), type: "image/png" },
+      ],
+      shortcut: withBasePath("/favicon.ico"),
+      apple: withBasePath("/remcardicon.png"),
     },
     openGraph: {
       type: "website",

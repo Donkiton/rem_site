@@ -1,8 +1,8 @@
-import { headers } from "next/headers";
+const PUBLIC_SITE_URL = "https://donkiton.github.io/rem_site/";
 
-const LOCAL_SITE_URL = "http://localhost:3000";
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-export async function resolveSiteUrl() {
+export function resolveSiteUrl() {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (configured) {
     try {
@@ -12,15 +12,9 @@ export async function resolveSiteUrl() {
     }
   }
 
-  try {
-    const requestHeaders = await headers();
-    const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
-    const protocol =
-      requestHeaders.get("x-forwarded-proto") ?? (host?.includes("localhost") ? "http" : "https");
-    if (host) return new URL(`${protocol}://${host}`);
-  } catch {
-    // Метаданные могут вычисляться без контекста запроса во время сборки.
-  }
+  return new URL(PUBLIC_SITE_URL);
+}
 
-  return new URL(LOCAL_SITE_URL);
+export function withBasePath(path: string) {
+  return `${BASE_PATH}${path.startsWith("/") ? path : `/${path}`}`;
 }
