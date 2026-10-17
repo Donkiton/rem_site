@@ -1444,6 +1444,8 @@ button.architecture-node.active { border-color: rgba(8,182,212,.5); background: 
 .open-source-section::before { position: absolute; top: -250px; right: -220px; width: 600px; height: 600px; border-radius: 50%; background: rgba(44,99,235,.1); filter: blur(90px); content: ""; }
 .open-source-layout { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: clamp(45px,8vw,110px); }
 .open-source-copy .section-heading { margin-top: 22px; }
+.release-summary { margin-top: 22px; color: var(--text-secondary); font-size: 13px; line-height: 1.7; }
+.release-summary strong { color: var(--text-primary); }
 .open-source-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 29px; }
 .release-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; color: var(--chart-blue); font-size: 13px; font-weight: 700; }
 .release-link svg { width: 17px; }

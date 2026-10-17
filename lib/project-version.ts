@@ -1,4 +1,4 @@
-export const PROJECT_VERSION_FALLBACK = "4.2.0";
+export const PROJECT_VERSION_FALLBACK = "5.1.9";
 export const PROJECT_VERSION_URL =
   "https://raw.githubusercontent.com/Donkiton/rem_card/main/VERSION";
 
