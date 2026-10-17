@@ -16,6 +16,15 @@ test("статическая сборка содержит русскую пре
   assert.match(html, /Программа для ОРИТ/);
   assert.match(html, /Операционный блок/);
   assert.match(html, /RemCard развивается публично/);
+  assert.match(html, /Версия 5\.1\.9/);
+  assert.match(html, /штатная остановка фоновой/);
+  assert.match(html, /реальные сбои по-прежнему/);
+  assert.match(html, /снимку запуска со сроком действия 30 минут/);
+  assert.match(html, /безопасной ограниченной передаче только изменившихся строк/);
+  assert.match(html, /центральная база остаётся источником истины/);
+  assert.match(html, /клиенты 5\.1\.6, 5\.1\.7 и 5\.1\.8 остаются совместимыми/);
+  assert.doesNotMatch(html, /sync_failed/);
+  assert.doesNotMatch(html, /27(?:×|x|\s*раз)/i);
   assert.match(html, /Единый центр архива/);
   assert.match(html, /текущая версия проекта —(?:<!-- -->|\s)*\d+\.\d+\.\d+/);
   assert.match(html, /softwareVersion\\?"?:\\?"\d+\.\d+\.\d+/);
