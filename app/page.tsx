@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/hero";
 import { ScreenshotCarousel } from "@/components/sections/screenshot-carousel";
 import {
   FinalCTASection,
+  EnglishOverviewSection,
   IntroSection,
   LocalNetworkSection,
   OpenSourceSection,
@@ -21,16 +22,15 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { getGitHubMetrics, getLatestGitHubRelease } from "@/lib/github";
 import { PROJECT_LINKS } from "@/lib/links";
-import { getProjectVersion } from "@/lib/project-version";
 import { ProjectVersionProvider } from "@/components/project-version-provider";
 
 export default async function Home() {
-  const [metrics, release, projectVersion] = await Promise.all([
+  const [metrics, release] = await Promise.all([
     getGitHubMetrics(),
     getLatestGitHubRelease(),
-    getProjectVersion(),
   ]);
-  const releaseUrl = release?.url ?? PROJECT_LINKS.releases;
+  const projectVersion = release.version;
+  const releaseUrl = release.url;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -42,7 +42,7 @@ export default async function Home() {
     description:
       "Экспериментальное приложение с доступным исходным кодом для процессов реанимации и операционного блока.",
     url: PROJECT_LINKS.repository,
-    downloadUrl: release?.downloadUrl ?? releaseUrl,
+    downloadUrl: release.downloadUrl ?? undefined,
     codeRepository: PROJECT_LINKS.repository,
     license: PROJECT_LINKS.license,
   };
@@ -66,6 +66,7 @@ export default async function Home() {
         <TechnologiesSection />
         <OpenSourceSection metrics={metrics} release={release} />
         <StorySection />
+        <EnglishOverviewSection />
         <RoadmapSection />
         <FAQAccordion />
         <FinalCTASection />

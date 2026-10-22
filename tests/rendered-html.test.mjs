@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { selectPublishedProjectVersion } from "../lib/project-version.ts";
 
 async function render() {
   return readFile(new URL("../out/index.html", import.meta.url), "utf8");
@@ -16,13 +17,13 @@ test("статическая сборка содержит русскую пре
   assert.match(html, /Программа для ОРИТ/);
   assert.match(html, /Операционный блок/);
   assert.match(html, /RemCard развивается публично/);
-  assert.match(html, /Версия 5\.1\.9/);
-  assert.match(html, /штатная остановка фоновой/);
-  assert.match(html, /реальные сбои по-прежнему/);
-  assert.match(html, /снимку запуска со сроком действия 30 минут/);
-  assert.match(html, /безопасной ограниченной передаче только изменившихся строк/);
-  assert.match(html, /центральная база остаётся источником истины/);
-  assert.match(html, /клиенты 5\.1\.6, 5\.1\.7 и 5\.1\.8 остаются совместимыми/);
+  assert.match(html, /Версия 5\.1\.10 от 20 октября 2026 года/);
+  assert.match(html, /передаются дельтой даже при большой истории/);
+  assert.match(html, /из потока интерфейса медсестры/);
+  assert.match(html, /поздние ответы не должны заменять более новые данные/);
+  assert.match(html, /после освобождения блокировки общей базы/);
+  assert.match(html, /Обновление необязательное/);
+  assert.match(html, /минимальная версия клиента не повышаются/);
   assert.doesNotMatch(html, /sync_failed/);
   assert.doesNotMatch(html, /27(?:×|x|\s*раз)/i);
   assert.match(html, /Единый центр архива/);
@@ -35,16 +36,31 @@ test("статическая сборка содержит русскую пре
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/);
 });
 
+test("версия галереи, подвала и ссылки релиза совпадает с опубликованной версией в метаданных", async () => {
+  const html = await render();
+  const version = html.match(/"softwareVersion":"(\d+\.\d+\.\d+)"/)?.[1];
+  assert.ok(version, "softwareVersion присутствует в JSON-LD");
+  assert.equal(selectPublishedProjectVersion({ tag_name: version, prerelease: false, draft: false }), version);
+  const escapedVersion = version.replaceAll(".", "\\.");
+  assert.match(html, new RegExp(`текущая версия проекта —(?:<!-- -->|\\s)*${escapedVersion}(?:<!-- -->)*\\.`));
+  assert.match(html, new RegExp(`class="footer-version">Версия(?:<!-- -->|\\s)*${escapedVersion}<`));
+  assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/tag/v${version}"`));
+  assert.ok(html.includes(`Скачать Windows-релиз ${version}`));
+  assert.doesNotMatch(html, /href="https:\/\/github\.com\/Donkiton\/rem_card\/releases\/tag\/v5\.1\.[689]"/);
+});
+
 test("ключевые разделы и ссылки присутствуют в HTML", async () => {
   const html = await render();
   const basePath = process.env.GITHUB_ACTIONS === "true" ? "/rem_site" : "";
-  for (const id of ["features", "interface", "roles", "architecture", "open-source", "faq", "contact"]) {
+  for (const id of ["features", "interface", "roles", "architecture", "open-source", "english", "faq", "contact"]) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
   assert.match(html, /https:\/\/github\.com\/Donkiton\/rem_card/);
   assert.match(html, /https:\/\/donkiton\.github\.io\/rem_card\/codemap\/codemap\.html/);
   assert.match(html, /mailto:menfise%40mail\.ru|mailto:menfise@mail\.ru/);
   assert.ok(html.includes(`${basePath}/images/remcard/remcard-real-screenshot.png`));
+  assert.ok(html.includes(`class="header-language-link" href="${basePath}/#english" lang="en"`));
+  assert.ok(html.includes(`src="${basePath}/images/clinicians-that-code-verified.svg"`));
 });
 
 test("SEO-файлы указывают на публичный GitHub Pages URL", async () => {
