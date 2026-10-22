@@ -172,10 +172,10 @@ export function Header() {
               </a>
             ))}
           </nav>
+          <a className="header-language-link" href={withBasePath("/#english")} lang="en">
+            English
+          </a>
           <div className="header-actions">
-            <SecondaryButton className="interface-header-button" href={withBasePath("/#interface")}>
-              Интерфейс
-            </SecondaryButton>
             <PrimaryButton href={PROJECT_LINKS.repository} external>
               <GithubMark width={17} height={17} aria-hidden="true" />
               GitHub

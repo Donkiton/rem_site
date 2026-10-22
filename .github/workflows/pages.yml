@@ -39,7 +39,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Проверить статический результат
-        run: node --test tests/rendered-html.test.mjs
+        run: node --experimental-strip-types --test tests/project-version.test.mjs tests/rendered-html.test.mjs
       - name: Настроить GitHub Pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5

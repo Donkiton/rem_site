@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Activity,
   ArrowDown,
@@ -230,14 +231,10 @@ export function OpenSourceSection({
   release,
 }: {
   metrics: GitHubMetrics;
-  release: GitHubReleaseInfo | null;
+  release: GitHubReleaseInfo;
 }) {
-  const releaseUrl = release?.url ?? PROJECT_LINKS.releases;
-  const releaseLabel = release?.prerelease
-    ? `Открыть тестовую Windows-версию ${release.version}`
-    : release
-      ? `Скачать Windows-релиз ${release.version}`
-      : "Открыть Windows-релизы";
+  const releaseUrl = release.url;
+  const releaseLabel = `Скачать Windows-релиз ${release.version}`;
   return (
     <section id="open-source" className="section open-source-section" aria-labelledby="open-source-title">
       <div className="site-container open-source-layout">
@@ -250,14 +247,13 @@ export function OpenSourceSection({
             description="Исходный код доступен на GitHub по RemCard Proprietary Source License 1.1. Физические лица могут изучать, изменять и использовать проект некоммерчески; организационное и коммерческое использование требует письменного разрешения."
           />
           <p className="release-summary">
-            <strong>Версия 5.1.9.</strong> При закрытии приложения штатная остановка фоновой
-            синхронизации больше не отображается как ошибка, а реальные сбои по-прежнему
-            фиксируются в журнале. В релиз также входят улучшения 5.1.8: рабочие места врача и
-            медсестры быстрее запускаются благодаря проверенному снимку запуска со сроком действия
-            30 минут и безопасной ограниченной передаче только изменившихся строк. Первая
-            синхронизация и резервный сценарий по-прежнему выполняют полную копию, а центральная
-            база остаётся источником истины. Схема общей базы и минимальная версия клиента не
-            изменились, поэтому клиенты 5.1.6, 5.1.7 и 5.1.8 остаются совместимыми.
+            <strong>Версия 5.1.10 от 20 октября 2026 года.</strong> Небольшие изменения реплики
+            передаются дельтой даже при большой истории. Сетевое чтение статуса пациента вынесено
+            из потока интерфейса медсестры; поздние ответы не должны заменять более новые данные.
+            Уточнены безопасные повторы сохранения начального статуса и проверены конфликты
+            одновременной записи врача и медсестры. Загрузка готовой ночной резервной копии в сеть
+            выполняется после освобождения блокировки общей базы. Обновление необязательное:
+            схема общей базы и её минимальная версия клиента не повышаются.
           </p>
           <div className="open-source-actions">
             <PrimaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />Поставить звезду</PrimaryButton>
@@ -285,7 +281,45 @@ export function StorySection() {
             RemCard создаётся практикующим врачом анестезиологом-реаниматологом. Проект появился из необходимости уменьшить повторное заполнение документов, объединить информацию о пациенте и сделать рабочий процесс отделения более наглядным.
           </blockquote>
           <p>Проект открыт для проверки и помощи. На сайте не приводятся неподтверждённые данные о внедрениях, организациях или количестве пользователей.</p>
+          <div className="builder-directory">
+            <a href={PROJECT_LINKS.clinicianDirectory} target="_blank" rel="noreferrer">
+              <Image
+                src={withBasePath("/images/clinicians-that-code-verified.svg")}
+                alt="Clinicians That Code: verified builder — карточка автора RemCard"
+                width={260}
+                height={28}
+                unoptimized
+              />
+            </a>
+            <p>Автор RemCard представлен в каталоге Clinicians That Code.</p>
+          </div>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function EnglishOverviewSection() {
+  return (
+    <section id="english" className="section english-section" lang="en" aria-labelledby="english-title">
+      <div className="site-container english-overview">
+        <SectionHeading
+          id="english-title"
+          eyebrow="English overview"
+          title="Windows charting for intensive care and the operating room"
+          description="RemCard ICU is an experimental desktop application developed by Vadim Bityutsky, an anaesthesiologist and intensive care physician. It brings patient records and shift workflows together for doctors, nurses and operating-room staff. The current interface and main documentation are in Russian."
+        />
+        <div className="english-details">
+          <p><strong>Shared clinical records.</strong> Role-specific workspaces cover prescriptions and administration records, vital signs, fluid balance, ventilation, procedures, laboratory results, operative events, reports and an archive.</p>
+          <p><strong>Local-network deployment.</strong> Windows workstations use a shared data folder and a central SQLite database. Validated local read replicas help with reading; committed central records remain the source of truth. Network behaviour, permissions, backups and recovery require acceptance testing in the intended environment.</p>
+          <p><strong>Source-available licence.</strong> The code is published under the RemCard Proprietary Source License 1.1. Non-commercial use by individuals is permitted; organisational use and any commercial use require prior written permission from the copyright holder.</p>
+          <p><strong>Experimental status.</strong> RemCard is not a registered medical device and does not replace clinical judgement or protocols. Automated tests and built-in safeguards do not establish clinical safety. Independent technical, security and clinical validation, local acceptance and a backup workflow are required before real-world use.</p>
+        </div>
+        <div className="open-source-actions">
+          <PrimaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />Source code</PrimaryButton>
+          <SecondaryButton href={withBasePath("/#interface")}>Demo screenshots</SecondaryButton>
+          <GhostButton href={PROJECT_LINKS.license} external>Read the licence</GhostButton>
+        </div>
       </div>
     </section>
   );
