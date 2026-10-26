@@ -55,7 +55,7 @@ export function RevealItem({ children, className }: { children: ReactNode; class
   const reduceMotion = useReducedMotion();
   return (
     <motion.div
-      className={className}
+      className={cx("reveal-item", className)}
       variants={
         reduceMotion
           ? undefined

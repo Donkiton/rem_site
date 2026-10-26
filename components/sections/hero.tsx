@@ -8,7 +8,7 @@ import { PrimaryButton, SecondaryButton, GhostButton } from "@/components/ui/but
 import { StatusBadge } from "@/components/ui/status-badge";
 import { PROJECT_LINKS } from "@/lib/links";
 import { GithubMark } from "@/components/icons/github-mark";
-import { withBasePath } from "@/lib/site-url";
+import { SCREENSHOT_VERSION, screenshots } from "@/content/screenshots";
 
 const vitals = [
   { label: "ЧСС", value: "78", unit: "уд/мин", tone: "red" },
@@ -79,12 +79,12 @@ export function Hero() {
               <span />
               <span />
               <span />
-              <strong>RemCard · отделение реанимации</strong>
+              <strong>RemCard · единый вход</strong>
             </div>
             <Image
               className="hero-screenshot"
-              src={withBasePath("/images/remcard/remcard-real-screenshot.png")}
-              alt="Главный экран RemCard со списком тестовых пациентов"
+              src={screenshots[0].src}
+              alt={screenshots[0].alt}
               width={1920}
               height={1040}
               sizes="(max-width: 960px) 100vw, 58vw"
@@ -93,7 +93,7 @@ export function Hero() {
             />
             <div className="hero-image-caption">
               <MousePointer2 size={15} aria-hidden="true" />
-              Настоящий интерфейс · только демо-данные
+              Интерфейс {SCREENSHOT_VERSION} · выбор роли
             </div>
           </div>
           <div className="vitals-layer" aria-label="Пример жизненно важных показателей">

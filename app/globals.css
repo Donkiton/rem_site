@@ -764,7 +764,7 @@ h3 {
 
 .hero-image-caption {
   position: absolute;
-  right: 12px;
+  left: 12px;
   bottom: 12px;
   display: inline-flex;
   align-items: center;
@@ -1760,6 +1760,11 @@ button.architecture-node.active { border-color: rgba(8,182,212,.5); background: 
   .hero-grid-background { animation: none; }
   .ecg-line path { stroke-dashoffset: 0; }
   .hero-window-wrap { transform: none !important; }
+  .reveal,
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 /* GitHub Pages: отдельная понятная страница вместо стандартной ошибки хостинга. */
 .not-found-page {

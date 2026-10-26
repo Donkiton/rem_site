@@ -17,13 +17,16 @@ test("статическая сборка содержит русскую пре
   assert.match(html, /Программа для ОРИТ/);
   assert.match(html, /Операционный блок/);
   assert.match(html, /RemCard развивается публично/);
-  assert.match(html, /Версия 5\.1\.10 от 20 октября 2026 года/);
-  assert.match(html, /передаются дельтой даже при большой истории/);
-  assert.match(html, /из потока интерфейса медсестры/);
-  assert.match(html, /поздние ответы не должны заменять более новые данные/);
-  assert.match(html, /после освобождения блокировки общей базы/);
-  assert.match(html, /Обновление необязательное/);
-  assert.match(html, /минимальная версия клиента не повышаются/);
+  if (html.includes('"softwareVersion":"5.1.12"')) {
+    assert.match(html, /25 октября 2026 года/);
+    assert.match(html, /исправлено поле даты и времени поступления/);
+    assert.match(html, /Обновление 5\.1\.12 необязательное для клиентов 5\.1\.11/);
+    assert.match(html, /схема общей базы остаётся 28/);
+    assert.match(html, /минимальная версия клиента — 5\.1\.11/);
+  } else {
+    assert.match(html, /Описание изменений и требования к установке опубликованы на странице этого релиза/);
+    assert.doesNotMatch(html, /Обновление 5\.1\.12 необязательное/);
+  }
   assert.doesNotMatch(html, /sync_failed/);
   assert.doesNotMatch(html, /27(?:×|x|\s*раз)/i);
   assert.match(html, /Единый центр архива/);
@@ -44,9 +47,10 @@ test("версия галереи, подвала и ссылки релиза �
   const escapedVersion = version.replaceAll(".", "\\.");
   assert.match(html, new RegExp(`текущая версия проекта —(?:<!-- -->|\\s)*${escapedVersion}(?:<!-- -->)*\\.`));
   assert.match(html, new RegExp(`class="footer-version">Версия(?:<!-- -->|\\s)*${escapedVersion}<`));
+  assert.match(html, new RegExp(`<strong>Версия(?:<!-- -->|\\s)*${escapedVersion}(?:<!-- -->)*\\.</strong>`));
   assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/tag/v${version}"`));
   assert.ok(html.includes(`Скачать Windows-релиз ${version}`));
-  assert.doesNotMatch(html, /href="https:\/\/github\.com\/Donkiton\/rem_card\/releases\/tag\/v5\.1\.[689]"/);
+  assert.doesNotMatch(html, /href="https:\/\/github\.com\/Donkiton\/rem_card\/releases\/tag\/v5\.1\.(?:[689]|10|11)"/);
 });
 
 test("ключевые разделы и ссылки присутствуют в HTML", async () => {
@@ -58,7 +62,11 @@ test("ключевые разделы и ссылки присутствуют �
   assert.match(html, /https:\/\/github\.com\/Donkiton\/rem_card/);
   assert.match(html, /https:\/\/donkiton\.github\.io\/rem_card\/codemap\/codemap\.html/);
   assert.match(html, /mailto:menfise%40mail\.ru|mailto:menfise@mail\.ru/);
-  assert.ok(html.includes(`${basePath}/images/remcard/remcard-real-screenshot.png`));
+  for (const screen of ["roles", "patients", "beds", "orders", "balance"]) {
+    assert.ok(html.includes(`${basePath}/images/remcard/remcard-${screen}-5-1.jpg`));
+  }
+  assert.match(html, /Снимки интерфейса(?:<!-- -->|\s)*5\.1\.0/);
+  assert.doesNotMatch(html, /images\/remcard\/remcard-[^"<>\s]*screenshot\.png|4\.1\.1/);
   assert.ok(html.includes(`class="header-language-link" href="${basePath}/#english" lang="en"`));
   assert.ok(html.includes(`src="${basePath}/images/clinicians-that-code-verified.svg"`));
 });

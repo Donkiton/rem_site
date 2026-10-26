@@ -42,7 +42,7 @@ const CONFIRMED_RELEASE: GitHubReleaseInfo = {
   url: `https://github.com/Donkiton/rem_card/releases/tag/v${PROJECT_VERSION_FALLBACK}`,
   downloadUrl: null,
   prerelease: false,
-  publishedAt: "2026-10-20",
+  publishedAt: "2026-10-25",
 };
 
 function githubHeaders() {

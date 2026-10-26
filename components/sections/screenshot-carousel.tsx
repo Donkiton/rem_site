@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, Expand, Images } from "lucide-react";
 import { useReducedMotion } from "motion/react";
-import { screenshots } from "@/content/screenshots";
+import { SCREENSHOT_VERSION, screenshots } from "@/content/screenshots";
 import { IconButton } from "@/components/ui/buttons";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/animations/reveal";
@@ -59,8 +59,9 @@ export function ScreenshotCarousel() {
               title="Посмотрите, как RemCard выглядит в работе"
               description={
                 <>
-                  Пять экранов показывают разные роли и этапы. Все снимки сделаны в версии 4.1.1
-                  на временных базах с демонстрационными данными; текущая версия проекта —{" "}
+                  Пять экранов показывают выбор роли, пациентов, койки, назначения и баланс жидкости.
+                  Снимки интерфейса {SCREENSHOT_VERSION} сделаны на демонстрационных данных;
+                  текущая версия проекта —{" "}
                   <ProjectVersionValue />.
                 </>
               }
