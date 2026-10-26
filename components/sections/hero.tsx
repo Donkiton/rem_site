@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { LayoutPanelTop, MousePointer2 } from "lucide-react";
@@ -18,6 +20,7 @@ const vitals = [
 ] as const;
 
 export function Hero() {
+  const { t } = useI18n();
   const reduceMotion = useReducedMotion();
   const frameRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -39,29 +42,24 @@ export function Hero() {
       <div className="hero-glow hero-glow-two" aria-hidden="true" />
       <div className="site-container hero-layout">
         <div className="hero-copy">
-          <StatusBadge tone="success">Доступный исходный код · Windows · Активная разработка</StatusBadge>
-          <h1 id="hero-title">RemCard ICU — электронная реанимационная карта</h1>
+          <StatusBadge tone="success">{t("Доступный исходный код · Windows · Активная разработка")}</StatusBadge>
+          <h1 id="hero-title">{t("RemCard ICU — электронная реанимационная карта")}</h1>
           <p className="hero-description">
-            Приложение RemCard объединяет назначения, жизненно важные показатели, инфузионную терапию, ИВЛ,
-            процедуры, лабораторные исследования, события операции и документы в едином рабочем
-            пространстве.
-          </p>
+            {t("Приложение RemCard объединяет назначения, жизненно важные показатели, инфузионную терапию, ИВЛ, процедуры, лабораторные исследования, события операции и документы в едином рабочем пространстве.")}</p>
           <div className="hero-actions">
             <PrimaryButton href={PROJECT_LINKS.repository} external>
               <GithubMark width={18} height={18} aria-hidden="true" />
-              Открыть проект на GitHub
-            </PrimaryButton>
-            <SecondaryButton href="#features">Посмотреть возможности</SecondaryButton>
+              {t("Открыть проект на GitHub")}</PrimaryButton>
+            <SecondaryButton href="#features">{t("Посмотреть возможности")}</SecondaryButton>
             <GhostButton href="#interface">
               <LayoutPanelTop size={18} aria-hidden="true" />
-              Изучить интерфейс
-            </GhostButton>
+              {t("Изучить интерфейс")}</GhostButton>
           </div>
-          <div className="hero-notes" aria-label="Ключевые особенности">
-            <span>Локальная сеть</span>
+          <div className="hero-notes" aria-label={t("Ключевые особенности")}>
+            <span>{t("Локальная сеть")}</span>
             <span>SQLite</span>
-            <span>Ролевые интерфейсы</span>
-            <span>Source-available</span>
+            <span>{t("Ролевые интерфейсы")}</span>
+            <span>{t("Исходный код")}</span>
           </div>
         </div>
 
@@ -79,12 +77,12 @@ export function Hero() {
               <span />
               <span />
               <span />
-              <strong>RemCard · единый вход</strong>
+              <strong>{t("RemCard · единый вход")}</strong>
             </div>
             <Image
               className="hero-screenshot"
               src={screenshots[0].src}
-              alt={screenshots[0].alt}
+              alt={t(screenshots[0].alt)}
               width={1920}
               height={1040}
               sizes="(max-width: 960px) 100vw, 58vw"
@@ -93,15 +91,15 @@ export function Hero() {
             />
             <div className="hero-image-caption">
               <MousePointer2 size={15} aria-hidden="true" />
-              Интерфейс {SCREENSHOT_VERSION} · выбор роли
+              {t("Интерфейс {version} · выбор роли", { version: SCREENSHOT_VERSION })}
             </div>
           </div>
-          <div className="vitals-layer" aria-label="Пример жизненно важных показателей">
+          <div className="vitals-layer" aria-label={t("Пример жизненно важных показателей")}>
             {vitals.map((vital) => (
               <div className={`vital-mini vital-${vital.tone}`} key={vital.label}>
-                <span>{vital.label}</span>
+                <span>{t(vital.label)}</span>
                 <strong>{vital.value}</strong>
-                <small>{vital.unit}</small>
+                <small>{t(vital.unit)}</small>
               </div>
             ))}
           </div>

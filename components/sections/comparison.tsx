@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import { useState } from "react";
 import { Check, Files, Search, Sparkles, X } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -24,6 +26,7 @@ const after = [
 ];
 
 export function ComparisonSection() {
+  const { t } = useI18n();
   const [active, setActive] = useState<"before" | "after">("after");
   return (
     <section id="comparison" className="section comparison-section" aria-labelledby="comparison-title">
@@ -31,41 +34,39 @@ export function ComparisonSection() {
         <Reveal>
           <SectionHeading
             id="comparison-title"
-            eyebrow="Задача продукта"
-            title="Меньше разрозненных записей — больше связного контекста"
-            description="RemCard не принимает решения за специалиста. Он помогает держать рабочую информацию в одном понятном контуре."
+            eyebrow={t("Задача продукта")}
+            title={t("Меньше разрозненных записей — больше связного контекста")}
+            description={t("RemCard не принимает решения за специалиста. Он помогает держать рабочую информацию в одном понятном контуре.")}
           />
         </Reveal>
-        <div className="comparison-toggle" role="group" aria-label="Сравнить рабочий процесс">
+        <div className="comparison-toggle" role="group" aria-label={t("Сравнить рабочий процесс")}>
           <button
             type="button"
             className={cx(active === "before" && "active")}
             aria-pressed={active === "before"}
             onClick={() => setActive("before")}
           >
-            До RemCard
-          </button>
+            {t("До RemCard")}</button>
           <button
             type="button"
             className={cx(active === "after" && "active")}
             aria-pressed={active === "after"}
             onClick={() => setActive("after")}
           >
-            С RemCard
-          </button>
+            {t("С RemCard")}</button>
         </div>
         <div className="comparison-grid">
           <article className={cx("comparison-card before-card", active === "before" && "active")}>
             <div className="comparison-card-heading">
               <span aria-hidden="true"><Files /></span>
               <div>
-                <small>До</small>
-                <h3>Без единого рабочего пространства</h3>
+                <small>{t("До")}</small>
+                <h3>{t("Без единого рабочего пространства")}</h3>
               </div>
             </div>
             <ul>
               {before.map((item) => (
-                <li key={item}><X size={17} aria-hidden="true" />{item}</li>
+                <li key={item}><X size={17} aria-hidden="true" />{t(item)}</li>
               ))}
             </ul>
             <div className="comparison-motif" aria-hidden="true"><Search /><span /><span /><span /></div>
@@ -75,17 +76,17 @@ export function ComparisonSection() {
             <div className="comparison-card-heading">
               <span aria-hidden="true"><Sparkles /></span>
               <div>
-                <small>С RemCard</small>
-                <h3>Общий рабочий контур</h3>
+                <small>{t("С RemCard")}</small>
+                <h3>{t("Общий рабочий контур")}</h3>
               </div>
             </div>
             <ul>
               {after.map((item) => (
-                <li key={item}><Check size={17} aria-hidden="true" />{item}</li>
+                <li key={item}><Check size={17} aria-hidden="true" />{t(item)}</li>
               ))}
             </ul>
             <div className="comparison-flow" aria-hidden="true">
-              <span>Врач</span><i /><span>Карта</span><i /><span>Медсестра</span>
+              <span>{t("Врач")}</span><i /><span>{t("Карта")}</span><i /><span>{t("Медсестра")}</span>
             </div>
           </article>
         </div>

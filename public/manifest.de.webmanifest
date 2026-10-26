@@ -1,0 +1,18 @@
+{
+  "name": "RemCard ICU – elektronische Intensivakte",
+  "short_name": "RemCard ICU",
+  "description": "Eine Windows-Anwendung mit einsehbarem Quellcode für Abläufe auf der Intensivstation und im Operationsbereich.",
+  "lang": "de",
+  "start_url": "/rem_site/de/",
+  "scope": "/rem_site/de/",
+  "display": "standalone",
+  "background_color": "#081018",
+  "theme_color": "#081018",
+  "icons": [
+    {
+      "src": "/rem_site/remcardicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

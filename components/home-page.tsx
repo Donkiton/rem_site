@@ -24,7 +24,11 @@ import { getGitHubMetrics, getLatestGitHubRelease } from "@/lib/github";
 import { PROJECT_LINKS } from "@/lib/links";
 import { ProjectVersionProvider } from "@/components/project-version-provider";
 
-export default async function Home() {
+import { createTranslator, type Locale } from "@/lib/i18n";
+import { getMessages } from "@/lib/messages";
+
+export default async function Home({ locale }: { locale: Locale }) {
+  const t = createTranslator(await getMessages(locale));
   const [metrics, release] = await Promise.all([
     getGitHubMetrics(),
     getLatestGitHubRelease(),
@@ -39,8 +43,8 @@ export default async function Home() {
     applicationCategory: "DesktopApplication",
     operatingSystem: "Windows",
     softwareVersion: projectVersion,
-    description:
-      "Экспериментальное приложение с доступным исходным кодом для процессов реанимации и операционного блока.",
+    description: t("Экспериментальное приложение с доступным исходным кодом для процессов реанимации и операционного блока."),
+    inLanguage: locale,
     url: PROJECT_LINKS.repository,
     downloadUrl: release.downloadUrl ?? undefined,
     codeRepository: PROJECT_LINKS.repository,
@@ -49,7 +53,7 @@ export default async function Home() {
 
   return (
     <ProjectVersionProvider initialVersion={projectVersion}>
-      <a className="skip-link" href="#main-content">Перейти к содержимому</a>
+      <a className="skip-link" href="#main-content">{t("Перейти к содержимому")}</a>
       <Header />
       <main id="main-content">
         <Hero />

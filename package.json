@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "test": "npm run build && node --experimental-strip-types --test tests/project-version.test.mjs tests/rendered-html.test.mjs",
+    "test": "npm run build && node --experimental-strip-types --test tests/project-version.test.mjs tests/rendered-html.test.mjs tests/i18n.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate"

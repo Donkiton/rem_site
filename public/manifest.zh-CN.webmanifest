@@ -1,0 +1,18 @@
+{
+  "name": "RemCard ICU — 电子重症监护记录",
+  "short_name": "RemCard ICU",
+  "description": "面向重症监护和手术室工作流程、可查看源代码的 Windows 应用。",
+  "lang": "zh-CN",
+  "start_url": "/rem_site/zh-CN/",
+  "scope": "/rem_site/zh-CN/",
+  "display": "standalone",
+  "background_color": "#081018",
+  "theme_color": "#081018",
+  "icons": [
+    {
+      "src": "/rem_site/remcardicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

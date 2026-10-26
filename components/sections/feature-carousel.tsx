@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
@@ -12,6 +14,7 @@ import { Reveal } from "@/components/animations/reveal";
 import { cx } from "@/lib/utils";
 
 export function FeatureCarousel() {
+  const { t } = useI18n();
   const reduceMotion = useReducedMotion();
   const [viewportRef, api] = useEmblaCarousel({ align: "start", loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -55,19 +58,19 @@ export function FeatureCarousel() {
           <div className="section-heading-row">
             <SectionHeading
               id="features-title"
-              eyebrow="Основные возможности"
-              title="Двенадцать модулей — одна карта"
-              description="Каждый модуль решает свою часть рабочего процесса, но остаётся связан с пациентом, сменой и ролью пользователя."
+              eyebrow={t("Основные возможности")}
+              title={t("Двенадцать модулей — одна карта")}
+              description={t("Каждый модуль решает свою часть рабочего процесса, но остаётся связан с пациентом, сменой и ролью пользователя.")}
             />
             <div className="carousel-controls">
-              <IconButton aria-label="Предыдущий модуль" onClick={() => stopAnd(() => api?.scrollPrev(Boolean(reduceMotion)))}>
+              <IconButton aria-label={t("Предыдущий модуль")} onClick={() => stopAnd(() => api?.scrollPrev(Boolean(reduceMotion)))}>
                 <ChevronLeft aria-hidden="true" />
               </IconButton>
-              <IconButton aria-label="Следующий модуль" onClick={() => stopAnd(() => api?.scrollNext(Boolean(reduceMotion)))}>
+              <IconButton aria-label={t("Следующий модуль")} onClick={() => stopAnd(() => api?.scrollNext(Boolean(reduceMotion)))}>
                 <ChevronRight aria-hidden="true" />
               </IconButton>
               <IconButton
-                aria-label={interactionStopped ? "Возобновить автопрокрутку" : "Остановить автопрокрутку"}
+                aria-label={interactionStopped ? t("Возобновить автопрокрутку") : t("Остановить автопрокрутку")}
                 onClick={() => setInteractionStopped((stopped) => !stopped)}
               >
                 {interactionStopped ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
@@ -78,8 +81,8 @@ export function FeatureCarousel() {
         <div
           className="embla feature-embla"
           role="region"
-          aria-roledescription="карусель"
-          aria-label="Модули RemCard"
+          aria-roledescription={t("карусель")}
+          aria-label={t("Модули RemCard")}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           onPointerDown={() => setInteractionStopped(true)}
@@ -103,8 +106,8 @@ export function FeatureCarousel() {
                   className="embla-slide feature-slide"
                   key={feature.title}
                   role="group"
-                  aria-roledescription="слайд"
-                  aria-label={`${index + 1} из ${features.length}`}
+                  aria-roledescription={t("слайд")}
+                  aria-label={t("{current} из {total}", { current: index + 1, total: features.length })}
                 >
                   <FeatureCard feature={feature} index={index} />
                 </div>
@@ -113,20 +116,20 @@ export function FeatureCarousel() {
           </div>
         </div>
         <div className="carousel-footer">
-          <div className="carousel-dots" aria-label="Выбор модуля">
+          <div className="carousel-dots" aria-label={t("Выбор модуля")}>
             {Array.from({ length: snapCount }, (_, index) => (
               <button
                 key={index}
                 className={cx("carousel-dot", index === selectedIndex && "active")}
                 type="button"
-                aria-label={`Перейти к модулю ${index + 1}`}
+                aria-label={t("Перейти к модулю {number}", { number: index + 1 })}
                 aria-current={index === selectedIndex ? "true" : undefined}
                 onClick={() => stopAnd(() => api?.scrollTo(index, Boolean(reduceMotion)))}
               />
             ))}
           </div>
           <p className="carousel-instruction">
-            {interactionStopped ? "Автопрокрутка остановлена после взаимодействия" : "Листайте, используйте стрелки или клавиши ← →"}
+            {interactionStopped ? t("Автопрокрутка остановлена после взаимодействия") : t("Листайте, используйте стрелки или клавиши ← →")}
           </p>
         </div>
       </div>

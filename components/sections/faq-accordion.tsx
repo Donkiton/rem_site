@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { faqItems } from "@/content/faq";
@@ -8,6 +10,7 @@ import { Reveal } from "@/components/animations/reveal";
 import { cx } from "@/lib/utils";
 
 export function FAQAccordion() {
+  const { t } = useI18n();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
     <section id="faq" className="section faq-section" aria-labelledby="faq-title">
@@ -16,13 +19,11 @@ export function FAQAccordion() {
           <SectionHeading
             id="faq-title"
             eyebrow="FAQ"
-            title="Частые вопросы"
-            description="Коротко о статусе проекта, платформе, данных и способах помочь."
+            title={t("Частые вопросы")}
+            description={t("Коротко о статусе проекта, платформе, данных и способах помочь.")}
           />
           <p className="faq-side-note">
-            Не нашли ответ? Напишите автору проекта или задайте вопрос в GitHub Issues без реальных
-            данных пациентов.
-          </p>
+            {t("Не нашли ответ? Напишите автору проекта или задайте вопрос в GitHub Issues без реальных данных пациентов.")}</p>
         </Reveal>
         <Reveal className="faq-list" delay={0.08}>
           {faqItems.map((item, index) => {
@@ -37,15 +38,15 @@ export function FAQAccordion() {
                     aria-controls={contentId}
                     onClick={() => setOpenIndex(open ? null : index)}
                   >
-                    <span>{item.question}</span>
+                    <span>{t(item.question)}</span>
                     <ChevronDown aria-hidden="true" />
                   </button>
                 </h3>
                 <div id={contentId} className="faq-answer" hidden={!open}>
-                  <p>{item.answer}</p>
+                  <p>{t(item.answer)}</p>
                   {"link" in item && item.link ? (
                     <a href={item.link.href} target="_blank" rel="noreferrer">
-                      {item.link.label} <span aria-hidden="true">↗</span>
+                      {t(item.link.label)} <span aria-hidden="true">↗</span>
                     </a>
                   ) : null}
                 </div>

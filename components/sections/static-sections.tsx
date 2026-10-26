@@ -1,3 +1,6 @@
+"use client";
+
+import { useI18n } from "@/components/i18n-provider";
 import Image from "next/image";
 import {
   Activity,
@@ -39,6 +42,7 @@ import { GithubMark } from "@/components/icons/github-mark";
 import { withBasePath } from "@/lib/site-url";
 
 export function IntroSection() {
+  const { t } = useI18n();
   const cards = [
     {
       icon: Boxes,
@@ -61,23 +65,20 @@ export function IntroSection() {
       <div className="site-container">
         <Reveal>
           <div className="intro-lead">
-            <SectionHeading id="intro-title" eyebrow="О проекте" title="Что такое RemCard ICU" />
+            <SectionHeading id="intro-title" eyebrow={t("О проекте")} title={t("Что такое RemCard ICU")} />
             <p>
-              RemCard — настольное приложение для ведения пациента в отделении реанимации и во
-              время операции. Врач, медицинская сестра и персонал операционного блока работают с
-              общей информацией, но каждый видит инструменты, необходимые именно для своей роли.
-            </p>
+              {t("RemCard — настольное приложение для ведения пациента в отделении реанимации и во время операции. Врач, медицинская сестра и персонал операционного блока работают с общей информацией, но каждый видит инструменты, необходимые именно для своей роли.")} </p>
           </div>
         </Reveal>
         <RevealGroup className="intro-cards">
           {cards.map((card) => {
             const Icon = card.icon;
             return (
-              <RevealItem key={card.title}>
+              <RevealItem key={t(card.title)}>
                 <article className="info-card">
                   <span aria-hidden="true"><Icon /></span>
-                  <h3>{card.title}</h3>
-                  <p>{card.text}</p>
+                  <h3>{t(card.title)}</h3>
+                  <p>{t(card.text)}</p>
                 </article>
               </RevealItem>
             );
@@ -89,6 +90,7 @@ export function IntroSection() {
 }
 
 export function SeoDirectorySection() {
+  const { t, l } = useI18n();
   const pages = [
     { title: "Электронная реанимационная карта", text: "Пациент, назначения, показатели, процедуры и документы в одном рабочем контуре.", href: withBasePath("/elektronnaya-reanimacionnaya-karta/") },
     { title: "Программа для ОРИТ", text: "Локальный Windows-сценарий для врача и медицинской сестры отделения реанимации.", href: withBasePath("/programma-dlya-orit/") },
@@ -100,18 +102,18 @@ export function SeoDirectorySection() {
         <Reveal>
           <SectionHeading
             id="seo-directory-title"
-            eyebrow="О RemCard ICU"
-            title="Выберите рабочий сценарий"
-            description="Отдельные страницы помогают быстро разобраться, подходит ли проект для конкретной задачи отделения."
+            eyebrow={t("О RemCard ICU")}
+            title={t("Выберите рабочий сценарий")}
+            description={t("Отдельные страницы помогают быстро разобраться, подходит ли проект для конкретной задачи отделения.")}
           />
         </Reveal>
         <RevealGroup className="seo-directory-grid">
           {pages.map((page) => (
             <RevealItem key={page.href}>
-              <a className="seo-directory-card" href={page.href}>
-                <h3>{page.title}</h3>
-                <p>{page.text}</p>
-                <span>Подробнее <ArrowRight aria-hidden="true" /></span>
+              <a className="seo-directory-card" href={l(page.href)}>
+                <h3>{t(page.title)}</h3>
+                <p>{t(page.text)}</p>
+                <span>{t("Подробнее")} <ArrowRight aria-hidden="true" /></span>
               </a>
             </RevealItem>
           ))}
@@ -122,15 +124,16 @@ export function SeoDirectorySection() {
 }
 
 export function RolesSection() {
+  const { t } = useI18n();
   return (
     <section id="roles" className="section roles-section" aria-labelledby="roles-title">
       <div className="site-container">
         <Reveal>
           <SectionHeading
             id="roles-title"
-            eyebrow="Для кого"
-            title="Инструменты в контексте каждой роли"
-            description="Врач, медсестра, плановый и экстренный оперблок доступны из общего окна RemCard.exe. Административные функции находятся в едином центре настроек."
+            eyebrow={t("Для кого")}
+            title={t("Инструменты в контексте каждой роли")}
+            description={t("Врач, медсестра, плановый и экстренный оперблок доступны из общего окна RemCard.exe. Административные функции находятся в едином центре настроек.")}
           />
         </Reveal>
         <RevealGroup className="roles-grid">
@@ -142,33 +145,34 @@ export function RolesSection() {
 }
 
 export function LocalNetworkSection() {
+  const { t } = useI18n();
   return (
     <section id="local-network" className="section local-network-section" aria-labelledby="network-title">
       <div className="site-container network-layout">
         <Reveal>
           <SectionHeading
             id="network-title"
-            eyebrow="Локальная сеть"
-            title="Совместная работа без облачного сервиса"
-            description="Приложение запускается на Windows-компьютерах. Рабочие места могут использовать общую папку данных, а основная информация хранится в SQLite."
+            eyebrow={t("Локальная сеть")}
+            title={t("Совместная работа без облачного сервиса")}
+            description={t("Приложение запускается на Windows-компьютерах. Рабочие места могут использовать общую папку данных, а основная информация хранится в SQLite.")}
           />
           <ul className="check-list">
-            <li><CheckCircle2 aria-hidden="true" />Интернет для обычной работы внутри организации не обязателен.</li>
-            <li><CheckCircle2 aria-hidden="true" />Для совместной работы необходима доступная локальная сеть.</li>
-            <li><CheckCircle2 aria-hidden="true" />Путь и права к общей папке настраиваются и проверяются отдельно.</li>
+            <li><CheckCircle2 aria-hidden="true" />{t("Интернет для обычной работы внутри организации не обязателен.")}</li>
+            <li><CheckCircle2 aria-hidden="true" />{t("Для совместной работы необходима доступная локальная сеть.")}</li>
+            <li><CheckCircle2 aria-hidden="true" />{t("Путь и права к общей папке настраиваются и проверяются отдельно.")}</li>
           </ul>
         </Reveal>
         <Reveal className="network-diagram" delay={0.08}>
-          <div className="network-computer"><Computer aria-hidden="true" /><strong>Врачебный компьютер</strong></div>
-          <div className="network-down"><ArrowDown aria-hidden="true" /><span>локальная сеть</span></div>
-          <div className="network-folder"><FolderSync aria-hidden="true" /><strong>Общая папка данных</strong><small>SQLite · настройки · резервные копии</small></div>
-          <div className="network-up"><ArrowDown aria-hidden="true" /><span>локальная сеть</span></div>
-          <div className="network-computer"><Computer aria-hidden="true" /><strong>Компьютер медсестры</strong></div>
+          <div className="network-computer"><Computer aria-hidden="true" /><strong>{t("Врачебный компьютер")}</strong></div>
+          <div className="network-down"><ArrowDown aria-hidden="true" /><span>{t("локальная сеть")}</span></div>
+          <div className="network-folder"><FolderSync aria-hidden="true" /><strong>{t("Общая папка данных")}</strong><small>{t("SQLite · настройки · резервные копии")}</small></div>
+          <div className="network-up"><ArrowDown aria-hidden="true" /><span>{t("локальная сеть")}</span></div>
+          <div className="network-computer"><Computer aria-hidden="true" /><strong>{t("Компьютер медсестры")}</strong></div>
         </Reveal>
       </div>
       <div className="site-container">
-        <WarningPanel title="Общая база требует подготовки">
-          <p>Размещение общей SQLite-базы требует проверки прав доступа, качества сети, резервного копирования, восстановления и поведения при потере соединения.</p>
+        <WarningPanel title={t("Общая база требует подготовки")}>
+          <p>{t("Размещение общей SQLite-базы требует проверки прав доступа, качества сети, резервного копирования, восстановления и поведения при потере соединения.")}</p>
         </WarningPanel>
       </div>
     </section>
@@ -176,18 +180,15 @@ export function LocalNetworkSection() {
 }
 
 export function SafetySection() {
+  const { t } = useI18n();
   return (
     <section id="responsibility" className="section safety-section" aria-labelledby="safety-title">
       <div className="site-container safety-panel">
         <Reveal className="safety-copy">
           <span className="safety-icon" aria-hidden="true"><ShieldAlert /></span>
-          <SectionHeading id="safety-title" eyebrow="Безопасность и ответственность" title="Экспериментальный проект требует независимой проверки" />
+          <SectionHeading id="safety-title" eyebrow={t("Безопасность и ответственность")} title={t("Экспериментальный проект требует независимой проверки")} />
           <p className="safety-lead">
-            RemCard является экспериментальным программным проектом и не зарегистрирован как
-            медицинское изделие. Программа не заменяет клинические протоколы, профессиональное
-            решение врача, медицинскую информационную систему организации или обязательный контроль
-            медицинского персонала.
-          </p>
+            {t("RemCard является экспериментальным программным проектом и не зарегистрирован как медицинское изделие. Программа не заменяет клинические протоколы, профессиональное решение врача, медицинскую информационную систему организации или обязательный контроль медицинского персонала.")} </p>
         </Reveal>
         <RevealGroup className="safety-list">
           {[
@@ -197,7 +198,7 @@ export function SafetySection() {
             "Внедрение выполняется под ответственность использующей организации.",
           ].map((item, index) => (
             <RevealItem key={item}>
-              <div><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><p>{item}</p></div>
+              <div><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><p>{t(item)}</p></div>
             </RevealItem>
           ))}
         </RevealGroup>
@@ -207,15 +208,16 @@ export function SafetySection() {
 }
 
 export function TechnologiesSection() {
+  const { t } = useI18n();
   return (
     <section id="technologies" className="section technologies-section" aria-labelledby="technologies-title">
       <div className="site-container">
         <Reveal>
           <SectionHeading
             id="technologies-title"
-            eyebrow="Технологии"
-            title="Понятный стек настольного приложения"
-            description="RemCard собирается вокруг Python, Qt и SQLite, проверяется тестами и развивается открыто на GitHub."
+            eyebrow={t("Технологии")}
+            title={t("Понятный стек настольного приложения")}
+            description={t("RemCard собирается вокруг Python, Qt и SQLite, проверяется тестами и развивается открыто на GitHub.")}
           />
         </Reveal>
         <RevealGroup className="technologies-grid">
@@ -233,39 +235,35 @@ export function OpenSourceSection({
   metrics: GitHubMetrics;
   release: GitHubReleaseInfo;
 }) {
+  const { t } = useI18n();
   const releaseUrl = release.url;
-  const releaseLabel = `Скачать Windows-релиз ${release.version}`;
+  const releaseLabel = t("Скачать Windows-релиз {version}", { version: release.version });
   return (
     <section id="open-source" className="section open-source-section" aria-labelledby="open-source-title">
       <div className="site-container open-source-layout">
         <Reveal className="open-source-copy">
-          <StatusBadge tone="success"><Code2 size={14} aria-hidden="true" />RemCard Source License · доступный код</StatusBadge>
+          <StatusBadge tone="success"><Code2 size={14} aria-hidden="true" />{t("RemCard Source License · доступный код")}</StatusBadge>
           <SectionHeading
             id="open-source-title"
-            eyebrow="Исходный код"
-            title="RemCard развивается публично"
-            description="Исходный код доступен на GitHub по RemCard Proprietary Source License 1.1. Физические лица могут изучать, изменять и использовать проект некоммерчески; организационное и коммерческое использование требует письменного разрешения."
+            eyebrow={t("Исходный код")}
+            title={t("RemCard развивается публично")}
+            description={t("Исходный код доступен на GitHub по RemCard Proprietary Source License 1.1. Физические лица могут изучать, изменять и использовать проект некоммерчески; организационное и коммерческое использование требует письменного разрешения.")}
           />
           <p className="release-summary">
-            <strong>Версия {release.version}.</strong>{" "}
+            <strong>{t("Версия {version}.", { version: release.version })}</strong>{" "}
             {release.version === "5.1.12" ? (
               <>
-                В релизе от 25 октября 2026 года исправлено поле даты и времени поступления:
-                значения полностью видны, календарь и редактирование времени работают в светлой
-                и тёмной темах. Обновление 5.1.12 необязательное для клиентов 5.1.11:
-                схема общей базы остаётся 28, минимальная версия клиента — 5.1.11.
-                Миграции общей базы и повышение минимальной версии в этой сборке отключены.
-              </>
+                {t("В релизе от 25 октября 2026 года исправлено поле даты и времени поступления: значения полностью видны, календарь и редактирование времени работают в светлой и тёмной темах. Обновление 5.1.12 необязательное для клиентов 5.1.11: схема общей базы остаётся 28, минимальная версия клиента — 5.1.11. Миграции общей базы и повышение минимальной версии в этой сборке отключены.")} </>
             ) : (
-              <>Описание изменений и требования к установке опубликованы на странице этого релиза.</>
+              <>{t("Описание изменений и требования к установке опубликованы на странице этого релиза.")}</>
             )}
           </p>
           <div className="open-source-actions">
-            <PrimaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />Поставить звезду</PrimaryButton>
-            <SecondaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />Открыть репозиторий</SecondaryButton>
-            <DangerButton href={PROJECT_LINKS.issues} external>Сообщить об ошибке</DangerButton>
-            <GhostButton href={PROJECT_LINKS.documentation} external><BookOpen size={17} aria-hidden="true" />Посмотреть документацию</GhostButton>
-            <GhostButton href={PROJECT_LINKS.changelog} external><History size={17} aria-hidden="true" />История изменений</GhostButton>
+            <PrimaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />{t("Поставить звезду")}</PrimaryButton>
+            <SecondaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />{t("Открыть репозиторий")}</SecondaryButton>
+            <DangerButton href={PROJECT_LINKS.issues} external>{t("Сообщить об ошибке")}</DangerButton>
+            <GhostButton href={PROJECT_LINKS.documentation} external><BookOpen size={17} aria-hidden="true" />{t("Посмотреть документацию")}</GhostButton>
+            <GhostButton href={PROJECT_LINKS.changelog} external><History size={17} aria-hidden="true" />{t("История изменений")}</GhostButton>
           </div>
           <a className="release-link" href={releaseUrl} target="_blank" rel="noreferrer"><FileClock aria-hidden="true" />{releaseLabel} <span aria-hidden="true">↗</span></a>
         </Reveal>
@@ -276,27 +274,27 @@ export function OpenSourceSection({
 }
 
 export function StorySection() {
+  const { t } = useI18n();
   return (
     <section id="story" className="section story-section" aria-labelledby="story-title">
       <div className="site-container story-layout">
-        <Reveal className="story-mark"><HeartHandshake aria-hidden="true" /><span>Практическая задача<br />стала публичным проектом</span></Reveal>
+        <Reveal className="story-mark"><HeartHandshake aria-hidden="true" /><span>{t("Практическая задача")}<br />{t("стала публичным проектом")}</span></Reveal>
         <Reveal className="story-copy" delay={0.06}>
-          <SectionHeading id="story-title" eyebrow="История проекта" title="Создан из реального рабочего контекста" />
+          <SectionHeading id="story-title" eyebrow={t("История проекта")} title={t("Создан из реального рабочего контекста")} />
           <blockquote>
-            RemCard создаётся практикующим врачом анестезиологом-реаниматологом. Проект появился из необходимости уменьшить повторное заполнение документов, объединить информацию о пациенте и сделать рабочий процесс отделения более наглядным.
-          </blockquote>
-          <p>Проект открыт для проверки и помощи. На сайте не приводятся неподтверждённые данные о внедрениях, организациях или количестве пользователей.</p>
+            {t("RemCard создаётся практикующим врачом анестезиологом-реаниматологом. Проект появился из необходимости уменьшить повторное заполнение документов, объединить информацию о пациенте и сделать рабочий процесс отделения более наглядным.")} </blockquote>
+          <p>{t("Проект открыт для проверки и помощи. На сайте не приводятся неподтверждённые данные о внедрениях, организациях или количестве пользователей.")}</p>
           <div className="builder-directory">
             <a href={PROJECT_LINKS.clinicianDirectory} target="_blank" rel="noreferrer">
               <Image
                 src={withBasePath("/images/clinicians-that-code-verified.svg")}
-                alt="Clinicians That Code: verified builder — карточка автора RemCard"
+                alt={t("Clinicians That Code: verified builder — карточка автора RemCard")}
                 width={260}
                 height={28}
                 unoptimized
               />
             </a>
-            <p>Автор RemCard представлен в каталоге Clinicians That Code.</p>
+            <p>{t("Автор RemCard представлен в каталоге Clinicians That Code.")}</p>
           </div>
         </Reveal>
       </div>
@@ -305,25 +303,26 @@ export function StorySection() {
 }
 
 export function EnglishOverviewSection() {
+  const { t, l } = useI18n();
   return (
-    <section id="english" className="section english-section" lang="en" aria-labelledby="english-title">
+    <section id="english" className="section english-section" aria-labelledby="english-title">
       <div className="site-container english-overview">
         <SectionHeading
           id="english-title"
-          eyebrow="English overview"
-          title="Windows charting for intensive care and the operating room"
-          description="RemCard ICU is an experimental desktop application developed by Vadim Bityutsky, an anaesthesiologist and intensive care physician. It brings patient records and shift workflows together for doctors, nurses and operating-room staff. The current interface and main documentation are in Russian."
+          eyebrow={t("Обзор проекта")}
+          title={t("Windows charting for intensive care and the operating room")}
+          description={t("RemCard ICU is an experimental desktop application developed by Vadim Bityutsky, an anaesthesiologist and intensive care physician. It brings patient records and shift workflows together for doctors, nurses and operating-room staff. The current interface and main documentation are in Russian.")}
         />
         <div className="english-details">
-          <p><strong>Shared clinical records.</strong> Role-specific workspaces cover prescriptions and administration records, vital signs, fluid balance, ventilation, procedures, laboratory results, operative events, reports and an archive.</p>
-          <p><strong>Local-network deployment.</strong> Windows workstations use a shared data folder and a central SQLite database. Validated local read replicas help with reading; committed central records remain the source of truth. Network behaviour, permissions, backups and recovery require acceptance testing in the intended environment.</p>
-          <p><strong>Source-available licence.</strong> The code is published under the RemCard Proprietary Source License 1.1. Non-commercial use by individuals is permitted; organisational use and any commercial use require prior written permission from the copyright holder.</p>
-          <p><strong>Experimental status.</strong> RemCard is not a registered medical device and does not replace clinical judgement or protocols. Automated tests and built-in safeguards do not establish clinical safety. Independent technical, security and clinical validation, local acceptance and a backup workflow are required before real-world use.</p>
+          <p><strong>{t("Shared clinical records.")}</strong>  {t("Role-specific workspaces cover prescriptions and administration records, vital signs, fluid balance, ventilation, procedures, laboratory results, operative events, reports and an archive.")}</p>
+          <p><strong>{t("Local-network deployment.")}</strong>  {t("Windows workstations use a shared data folder and a central SQLite database. Validated local read replicas help with reading; committed central records remain the source of truth. Network behaviour, permissions, backups and recovery require acceptance testing in the intended environment.")}</p>
+          <p><strong>{t("Source-available licence.")}</strong>  {t("The code is published under the RemCard Proprietary Source License 1.1. Non-commercial use by individuals is permitted; organisational use and any commercial use require prior written permission from the copyright holder.")}</p>
+          <p><strong>{t("Experimental status.")}</strong>  {t("RemCard is not a registered medical device and does not replace clinical judgement or protocols. Automated tests and built-in safeguards do not establish clinical safety. Independent technical, security and clinical validation, local acceptance and a backup workflow are required before real-world use.")}</p>
         </div>
         <div className="open-source-actions">
-          <PrimaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />Source code</PrimaryButton>
-          <SecondaryButton href={withBasePath("/#interface")}>Demo screenshots</SecondaryButton>
-          <GhostButton href={PROJECT_LINKS.license} external>Read the licence</GhostButton>
+          <PrimaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />{t("Source code")}</PrimaryButton>
+          <SecondaryButton href={l(withBasePath("/#interface"))}>{t("Demo screenshots")}</SecondaryButton>
+          <GhostButton href={PROJECT_LINKS.license} external>{t("Read the licence")}</GhostButton>
         </div>
       </div>
     </section>
@@ -338,6 +337,7 @@ const statusTone: Record<RoadmapStatus, "success" | "progress" | "planned" | "re
 };
 
 export function RoadmapSection() {
+  const { t } = useI18n();
   const statusIcons = { "Реализовано": CheckCircle2, "Развивается": Activity, "Запланировано": Clock3, "Исследуется": Lightbulb };
   return (
     <section id="roadmap" className="section roadmap-section" aria-labelledby="roadmap-title">
@@ -345,15 +345,15 @@ export function RoadmapSection() {
         <Reveal>
           <SectionHeading
             id="roadmap-title"
-            eyebrow="Без жёстких сроков"
-            title="Направления развития"
-            description="Это обзор направлений, а не обещание дат выпуска. Реализованные клинические модули продолжают уточняться и проверяться."
+            eyebrow={t("Без жёстких сроков")}
+            title={t("Направления развития")}
+            description={t("Это обзор направлений, а не обещание дат выпуска. Реализованные клинические модули продолжают уточняться и проверяться.")}
           />
         </Reveal>
         <RevealGroup className="roadmap-grid">
           {roadmap.map((item) => {
             const Icon = statusIcons[item.status];
-            return <RevealItem key={item.title}><article className="roadmap-item"><Icon aria-hidden="true" /><h3>{item.title}</h3><StatusBadge tone={statusTone[item.status]}>{item.status}</StatusBadge></article></RevealItem>;
+            return <RevealItem key={t(item.title)}><article className="roadmap-item"><Icon aria-hidden="true" /><h3>{t(item.title)}</h3><StatusBadge tone={statusTone[item.status]}>{t(item.status)}</StatusBadge></article></RevealItem>;
           })}
         </RevealGroup>
       </div>
@@ -362,19 +362,20 @@ export function RoadmapSection() {
 }
 
 export function FinalCTASection() {
+  const { t } = useI18n();
   return (
     <section id="contact" className="section final-cta-section" aria-labelledby="final-cta-title">
       <div className="site-container final-cta-panel">
         <Reveal className="final-cta-copy">
           <span className="final-cta-icon" aria-hidden="true"><Sparkles /></span>
-          <h2 id="final-cta-title">Помогите сделать инструменты для реанимации удобнее</h2>
-          <p>RemCard развивается как публичный source-available проект. Звезда на GitHub, сообщение об ошибке, предложение врача или вклад разработчика помогают проекту становиться устойчивее и понятнее.</p>
+          <h2 id="final-cta-title">{t("Помогите сделать инструменты для реанимации удобнее")}</h2>
+          <p>{t("RemCard развивается как публичный source-available проект. Звезда на GitHub, сообщение об ошибке, предложение врача или вклад разработчика помогают проекту становиться устойчивее и понятнее.")}</p>
           <div className="final-cta-actions">
-            <PrimaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />Открыть RemCard на GitHub</PrimaryButton>
-            <SecondaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />Поставить звезду</SecondaryButton>
-            <DangerButton href={PROJECT_LINKS.issues} external>Сообщить об ошибке</DangerButton>
+            <PrimaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />{t("Открыть RemCard на GitHub")}</PrimaryButton>
+            <SecondaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />{t("Поставить звезду")}</SecondaryButton>
+            <DangerButton href={PROJECT_LINKS.issues} external>{t("Сообщить об ошибке")}</DangerButton>
           </div>
-          <a className="email-direct" href={PROJECT_LINKS.email}><Mail size={17} aria-hidden="true" />menfise@mail.ru</a>
+          <a className="email-direct" href={PROJECT_LINKS.email}><Mail size={17} aria-hidden="true" />{t("menfise@mail.ru")}</a>
         </Reveal>
         <Reveal delay={0.1}><ContactForm /></Reveal>
       </div>

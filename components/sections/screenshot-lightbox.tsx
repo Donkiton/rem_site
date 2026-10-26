@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Search, ZoomIn, ZoomOut, X } from "lucide-react";
@@ -16,6 +18,7 @@ export function ScreenshotLightbox({
   onClose: () => void;
   onChange: (index: number) => void;
 }) {
+  const { t } = useI18n();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const [zoomed, setZoomed] = useState(false);
@@ -78,17 +81,17 @@ export function ScreenshotLightbox({
       <div className="lightbox-panel" ref={panelRef}>
         <div className="lightbox-header">
           <div>
-            <span>Экран {index + 1} из {screenshots.length}</span>
-            <h2 id="lightbox-title">{screenshot.title}</h2>
+            <span>{t("Экран {current} из {total}", { current: index + 1, total: screenshots.length })}</span>
+            <h2 id="lightbox-title">{t(screenshot.title)}</h2>
           </div>
           <div className="lightbox-actions">
             <IconButton
-              aria-label={zoomed ? "Уменьшить изображение" : "Увеличить изображение"}
+              aria-label={zoomed ? t("Уменьшить изображение") : t("Увеличить изображение")}
               onClick={() => setZoomed((value) => !value)}
             >
               {zoomed ? <ZoomOut aria-hidden="true" /> : <ZoomIn aria-hidden="true" />}
             </IconButton>
-            <button ref={closeRef} className="icon-button" type="button" aria-label="Закрыть" onClick={onClose}>
+            <button ref={closeRef} className="icon-button" type="button" aria-label={t("Закрыть")} onClick={onClose}>
               <X aria-hidden="true" />
             </button>
           </div>
@@ -96,7 +99,7 @@ export function ScreenshotLightbox({
         <div className={cx("lightbox-image-scroll", zoomed && "zoomed")}>
           <Image
             src={screenshot.src}
-            alt={screenshot.alt}
+            alt={t(screenshot.alt)}
             width={1920}
             height={1040}
             sizes="100vw"
@@ -104,17 +107,17 @@ export function ScreenshotLightbox({
             unoptimized
           />
         </div>
-        <p className="lightbox-description"><Search size={16} aria-hidden="true" />{screenshot.description}</p>
+        <p className="lightbox-description"><Search size={16} aria-hidden="true" />{t(screenshot.description)}</p>
         <IconButton
           className="lightbox-arrow lightbox-arrow-left"
-          aria-label="Предыдущий экран"
+          aria-label={t("Предыдущий экран")}
           onClick={() => navigate((index - 1 + screenshots.length) % screenshots.length)}
         >
           <ChevronLeft aria-hidden="true" />
         </IconButton>
         <IconButton
           className="lightbox-arrow lightbox-arrow-right"
-          aria-label="Следующий экран"
+          aria-label={t("Следующий экран")}
           onClick={() => navigate((index + 1) % screenshots.length)}
         >
           <ChevronRight aria-hidden="true" />

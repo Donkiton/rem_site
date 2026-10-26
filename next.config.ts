@@ -5,6 +5,7 @@ const basePath = process.env.GITHUB_ACTIONS === "true" ? "/rem_site" : "";
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
+  experimental: { globalNotFound: true },
   basePath,
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,

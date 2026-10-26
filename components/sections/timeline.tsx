@@ -1,11 +1,14 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import { motion, useReducedMotion } from "motion/react";
 import { patientJourney } from "@/content/site";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal, RevealGroup, RevealItem } from "@/components/animations/reveal";
 
 export function Timeline() {
+  const { t } = useI18n();
   const reduceMotion = useReducedMotion();
   const transition = { duration: 1.4, ease: [0.22, 1, 0.36, 1] as const };
   return (
@@ -14,9 +17,9 @@ export function Timeline() {
         <Reveal>
           <SectionHeading
             id="timeline-title"
-            eyebrow="Путь пациента"
-            title="Как проходит работа с пациентом"
-            description="Записи последовательно дополняют одну карту: от регистрации до завершения случая или архива."
+            eyebrow={t("Путь пациента")}
+            title={t("Как проходит работа с пациентом")}
+            description={t("Записи последовательно дополняют одну карту: от регистрации до завершения случая или архива.")}
           />
         </Reveal>
         <RevealGroup className="patient-timeline">
@@ -39,7 +42,7 @@ export function Timeline() {
           {patientJourney.map((step, index) => (
             <RevealItem className="timeline-step" key={step}>
               <span className="timeline-marker">{index + 1}</span>
-              <h3>{step}</h3>
+              <h3>{t(step)}</h3>
             </RevealItem>
           ))}
         </RevealGroup>

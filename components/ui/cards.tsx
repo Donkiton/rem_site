@@ -1,3 +1,6 @@
+"use client";
+
+import { useI18n } from "@/components/i18n-provider";
 import type { LucideIcon } from "lucide-react";
 import {
   Activity,
@@ -44,6 +47,7 @@ const roleIcons: Record<RoleIconName, LucideIcon> = {
 };
 
 export function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+  const { t } = useI18n();
   const Icon = featureIcons[feature.icon];
   return (
     <article className={cx("feature-card", `feature-${feature.accent}`)}>
@@ -53,11 +57,11 @@ export function FeatureCard({ feature, index }: { feature: Feature; index: numbe
         </span>
         <span className="feature-number">{String(index + 1).padStart(2, "0")}</span>
       </div>
-      <h3>{feature.title}</h3>
-      <p>{feature.description}</p>
-      <div className="feature-preview" aria-label={`Пример данных: ${feature.preview}`}>
+      <h3>{t(feature.title)}</h3>
+      <p>{t(feature.description)}</p>
+      <div className="feature-preview" aria-label={t("Пример данных: {preview}", { preview: t(feature.preview) })}>
         <span className="feature-preview-dot" aria-hidden="true" />
-        {feature.preview}
+        {t(feature.preview)}
       </div>
     </article>
   );
@@ -73,19 +77,20 @@ export function RoleCard({
     items: readonly string[];
   };
 }) {
+  const { t } = useI18n();
   const Icon = roleIcons[role.icon];
   return (
     <article className="role-card">
       <span className="role-icon" aria-hidden="true">
         <Icon size={26} />
       </span>
-      <h3>{role.title}</h3>
-      <p>{role.description}</p>
+      <h3>{t(role.title)}</h3>
+      <p>{t(role.description)}</p>
       <ul>
         {role.items.map((item) => (
           <li key={item}>
             <span aria-hidden="true">✓</span>
-            {item}
+            {t(item)}
           </li>
         ))}
       </ul>

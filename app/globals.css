@@ -1813,3 +1813,29 @@ button.architecture-node.active { border-color: rgba(8,182,212,.5); background: 
   font-weight: 750;
   text-decoration: none;
 }
+
+
+/* Переключение языка и адаптация общей навигации. */
+.language-switcher { display:inline-flex; flex:0 0 auto; align-items:center; gap:6px; min-height:44px; padding:0 8px; border:1px solid var(--border); border-radius:10px; background:var(--surface); color:var(--text-secondary); }
+.language-switcher:focus-within { outline:2px solid var(--secondary); outline-offset:3px; }
+.language-select { width:113px; min-height:44px; border:0; background:transparent; color:var(--text-primary); font:inherit; font-size:13px; cursor:pointer; }
+.language-select option { background:var(--surface); color:var(--text-primary); }
+.header-inner > .language-switcher { margin-left:auto; }
+.mobile-nav-panel > .language-switcher { margin-top:20px; align-self:flex-start; }
+.not-found-languages { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 14px; margin-top:24px; }
+.not-found-languages a { font-size:14px; }
+@media (max-width:1380px) {
+ .desktop-navigation { display:none; }
+ .mobile-menu-button { display:inline-grid; }
+}
+@media (max-width:640px) {
+ .header-inner { gap:8px; }
+ .header-inner > .language-switcher { gap:0; padding-inline:5px; }
+ .header-inner > .language-switcher > svg { display:none; }
+ .header-inner > .language-switcher .language-select { width:103px; }
+}
+@media (max-width:380px) {
+ .header-inner > .brand { gap:6px; font-size:15px; }
+ .header-inner > .brand img { width:30px; height:30px; }
+ .header-inner > .language-switcher .language-select { width:88px; }
+}
