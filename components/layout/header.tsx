@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -8,6 +10,7 @@ import { cx } from "@/lib/utils";
 import { IconButton, PrimaryButton, SecondaryButton } from "@/components/ui/buttons";
 import { GithubMark } from "@/components/icons/github-mark";
 import { withBasePath } from "@/lib/site-url";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 const navigation = [
   { label: "Возможности", href: withBasePath("/#features"), id: "features" },
@@ -26,6 +29,7 @@ export function MobileNavigation({
   open: boolean;
   onClose: () => void;
 }) {
+  const { t, l } = useI18n();
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,7 +48,7 @@ export function MobileNavigation({
     const focusable = () =>
       Array.from(
         panel?.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          'a[href], button:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
         ) ?? [],
       );
 
@@ -82,39 +86,38 @@ export function MobileNavigation({
   }, [open, onClose]);
 
   return (
-    <div className={cx("mobile-navigation", open && "mobile-navigation-open")} aria-hidden={!open}>
+    <div className={cx("mobile-navigation", open && "mobile-navigation-open")} aria-hidden={!open} inert={!open}>
       <button className="mobile-nav-backdrop" type="button" tabIndex={-1} aria-hidden="true" onClick={onClose} />
-      <div ref={panelRef} className="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Навигация">
+      <div ref={panelRef} className="mobile-nav-panel" role="dialog" aria-modal="true" aria-label={t("Навигация")}>
         <div className="mobile-nav-head">
-          <a className="brand" href={withBasePath("/")} onClick={onClose}>
+          <a className="brand" href={l(withBasePath("/"))} onClick={onClose}>
             <Image src={withBasePath("/remcardicon.png")} alt="" width={36} height={36} unoptimized />
             <span>RemCard ICU</span>
           </a>
-          <IconButton aria-label="Закрыть меню" onClick={onClose}>
+          <IconButton aria-label={t("Закрыть меню")} onClick={onClose}>
             <X aria-hidden="true" />
           </IconButton>
         </div>
-        <nav aria-label="Мобильная навигация">
+        <nav aria-label={t("Мобильная навигация")}>
           {navigation.map((item) => (
             <a
               key={item.label}
-              href={item.href}
+              href={l(item.href)}
               target={"external" in item && item.external ? "_blank" : undefined}
               rel={"external" in item && item.external ? "noreferrer" : undefined}
               onClick={onClose}
             >
-              {item.label}
+              {t(item.label)}
             </a>
           ))}
         </nav>
+        <LanguageSwitcher />
         <div className="mobile-nav-actions">
           <PrimaryButton href={PROJECT_LINKS.repository} external>
             <GithubMark width={17} height={17} aria-hidden="true" />
-            Открыть GitHub
-          </PrimaryButton>
-          <SecondaryButton href={withBasePath("/#interface")} onClick={onClose}>
-            Посмотреть интерфейс
-          </SecondaryButton>
+            {t("Открыть GitHub")}</PrimaryButton>
+          <SecondaryButton href={l(withBasePath("/#interface"))} onClick={onClose}>
+            {t("Посмотреть интерфейс")}</SecondaryButton>
         </div>
       </div>
     </div>
@@ -122,6 +125,7 @@ export function MobileNavigation({
 }
 
 export function Header() {
+  const { t, l } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState("top");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -154,34 +158,32 @@ export function Header() {
     <>
       <header className={cx("site-header", scrolled && "site-header-scrolled")}>
         <div className="header-inner">
-          <a className="brand" href={withBasePath("/")} aria-label="RemCard ICU — на главную">
+          <a className="brand" href={l(withBasePath("/"))} aria-label={t("RemCard ICU — на главную")}>
             <Image src={withBasePath("/remcardicon.png")} alt="" width={38} height={38} priority unoptimized />
             <span>RemCard ICU</span>
           </a>
-          <nav className="desktop-navigation" aria-label="Основная навигация">
+          <nav className="desktop-navigation" aria-label={t("Основная навигация")}>
             {navigation.map((item) => (
               <a
                 key={item.label}
                 className={cx("id" in item && item.id === activeId && "active")}
-                href={item.href}
+                href={l(item.href)}
                 target={"external" in item && item.external ? "_blank" : undefined}
                 rel={"external" in item && item.external ? "noreferrer" : undefined}
                 aria-current={"id" in item && item.id === activeId ? "location" : undefined}
               >
-                {item.label}
+                {t(item.label)}
               </a>
             ))}
           </nav>
-          <a className="header-language-link" href={withBasePath("/#english")} lang="en">
-            English
-          </a>
+          <LanguageSwitcher />
           <div className="header-actions">
             <PrimaryButton href={PROJECT_LINKS.repository} external>
               <GithubMark width={17} height={17} aria-hidden="true" />
               GitHub
             </PrimaryButton>
           </div>
-          <IconButton className="mobile-menu-button" aria-label="Открыть меню" onClick={() => setMenuOpen(true)}>
+          <IconButton className="mobile-menu-button" aria-label={t("Открыть меню")} onClick={() => setMenuOpen(true)}>
             <Menu aria-hidden="true" />
           </IconButton>
         </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/components/i18n-provider";
+
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
@@ -19,6 +21,7 @@ const ScreenshotLightbox = dynamic(
 );
 
 export function ScreenshotCarousel() {
+  const { t } = useI18n();
   const reduceMotion = useReducedMotion();
   const [viewportRef, api] = useEmblaCarousel({ loop: true, align: "center" });
   const [selected, setSelected] = useState(0);
@@ -55,22 +58,21 @@ export function ScreenshotCarousel() {
           <div className="section-heading-row gallery-heading-row">
             <SectionHeading
               id="gallery-title"
-              eyebrow="Настоящий интерфейс"
-              title="Посмотрите, как RemCard выглядит в работе"
+              eyebrow={t("Настоящий интерфейс")}
+              title={t("Посмотрите, как RemCard выглядит в работе")}
               description={
                 <>
-                  Пять экранов показывают выбор роли, пациентов, койки, назначения и баланс жидкости.
-                  Снимки интерфейса {SCREENSHOT_VERSION} сделаны на демонстрационных данных;
-                  текущая версия проекта —{" "}
-                  <ProjectVersionValue />.
+                  {t("Пять экранов показывают выбор роли, пациентов, койки, назначения и баланс жидкости. Снимки интерфейса")}{" "}
+                  {SCREENSHOT_VERSION}{" "}{t("сделаны на демонстрационных данных; текущая версия проекта —")}{" "}
+                  <ProjectVersionValue />. {t("Интерфейс приложения на снимках — русский.")}
                 </>
               }
             />
             <div className="carousel-controls">
-              <IconButton aria-label="Предыдущий экран" onClick={() => api?.scrollPrev(Boolean(reduceMotion))}>
+              <IconButton aria-label={t("Предыдущий экран")} onClick={() => api?.scrollPrev(Boolean(reduceMotion))}>
                 <ChevronLeft aria-hidden="true" />
               </IconButton>
-              <IconButton aria-label="Следующий экран" onClick={() => api?.scrollNext(Boolean(reduceMotion))}>
+              <IconButton aria-label={t("Следующий экран")} onClick={() => api?.scrollNext(Boolean(reduceMotion))}>
                 <ChevronRight aria-hidden="true" />
               </IconButton>
             </div>
@@ -80,8 +82,8 @@ export function ScreenshotCarousel() {
         <div
           className="screenshot-stage"
           role="region"
-          aria-roledescription="карусель"
-          aria-label="Галерея интерфейса RemCard"
+          aria-roledescription={t("карусель")}
+          aria-label={t("Галерея интерфейса RemCard")}
           tabIndex={0}
           onKeyDown={(event) => {
             if (event.key === "ArrowLeft") api?.scrollPrev(Boolean(reduceMotion));
@@ -95,8 +97,8 @@ export function ScreenshotCarousel() {
                   className="embla-slide screenshot-slide"
                   key={item.src}
                   role="group"
-                  aria-roledescription="слайд"
-                  aria-label={`${index + 1} из ${screenshots.length}: ${item.title}`}
+                  aria-roledescription={t("слайд")}
+                  aria-label={t("{current} из {total}: {title}", { current: index + 1, total: screenshots.length, title: t(item.title) })}
                   aria-hidden={index !== selected}
                   inert={index !== selected}
                 >
@@ -108,14 +110,14 @@ export function ScreenshotCarousel() {
                   >
                     <Image
                       src={item.src}
-                      alt={item.alt}
+                      alt={t(item.alt)}
                       width={1920}
                       height={1040}
                       sizes="(max-width: 900px) 100vw, 1180px"
                       loading={index === 0 ? "eager" : "lazy"}
                       unoptimized
                     />
-                    <span className="expand-hint"><Expand size={17} aria-hidden="true" />На весь экран</span>
+                    <span className="expand-hint"><Expand size={17} aria-hidden="true" />{t("На весь экран")}</span>
                   </button>
                 </div>
               ))}
@@ -125,12 +127,12 @@ export function ScreenshotCarousel() {
             <span className="screenshot-caption-icon" aria-hidden="true"><Images /></span>
             <div>
               <small>{String(selected + 1).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}</small>
-              <h3>{screenshots[selected].title}</h3>
-              <p>{screenshots[selected].description}</p>
+              <h3>{t(screenshots[selected].title)}</h3>
+              <p>{t(screenshots[selected].description)}</p>
             </div>
           </div>
         </div>
-        <div className="screenshot-thumbnails" role="group" aria-label="Выбрать экран">
+        <div className="screenshot-thumbnails" role="group" aria-label={t("Выбрать экран")}>
           {screenshots.map((item, index) => (
             <button
               key={item.src}
@@ -140,7 +142,7 @@ export function ScreenshotCarousel() {
               onClick={() => goTo(index)}
             >
               <Image src={item.src} alt="" width={192} height={104} sizes="160px" unoptimized />
-              <span>{item.shortTitle}</span>
+              <span>{t(item.shortTitle)}</span>
             </button>
           ))}
         </div>

@@ -1,3 +1,6 @@
+"use client";
+
+import { useI18n } from "@/components/i18n-provider";
 import type { SimpleIcon } from "simple-icons";
 import { siGithub, siPython, siPytest, siQt, siSqlite } from "simple-icons";
 import { BadgeCheck, Code2, PackageCheck, PanelsTopLeft } from "lucide-react";
@@ -27,6 +30,7 @@ export function TechnologyBadge({
     description: string;
   };
 }) {
+  const { t } = useI18n();
   const icon = brandIcons[technology.icon];
   return (
     <div className="technology-badge">
@@ -40,8 +44,8 @@ export function TechnologyBadge({
         )}
       </span>
       <span>
-        <strong>{technology.name}</strong>
-        <small>{technology.description}</small>
+        <strong>{t(technology.name)}</strong>
+        <small>{t(technology.description)}</small>
       </span>
     </div>
   );

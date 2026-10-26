@@ -67,7 +67,7 @@ test("ключевые разделы и ссылки присутствуют �
   }
   assert.match(html, /Снимки интерфейса(?:<!-- -->|\s)*5\.1\.0/);
   assert.doesNotMatch(html, /images\/remcard\/remcard-[^"<>\s]*screenshot\.png|4\.1\.1/);
-  assert.ok(html.includes(`class="header-language-link" href="${basePath}/#english" lang="en"`));
+  assert.ok(html.includes('class="language-select"'));
   assert.ok(html.includes(`src="${basePath}/images/clinicians-that-code-verified.svg"`));
 });
 

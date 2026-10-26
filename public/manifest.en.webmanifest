@@ -1,0 +1,18 @@
+{
+  "name": "RemCard ICU — electronic intensive-care chart",
+  "short_name": "RemCard ICU",
+  "description": "A source-available Windows application for intensive-care and operating-room workflows.",
+  "lang": "en",
+  "start_url": "/rem_site/en/",
+  "scope": "/rem_site/en/",
+  "display": "standalone",
+  "background_color": "#081018",
+  "theme_color": "#081018",
+  "icons": [
+    {
+      "src": "/rem_site/remcardicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
