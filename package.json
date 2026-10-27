@@ -7,11 +7,15 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "test": "npm run build && node --experimental-strip-types --test tests/project-version.test.mjs tests/rendered-html.test.mjs tests/i18n.test.mjs",
+    "build": "npm run build:demo && next build",
+    "test": "npm run build && npm run test:static && npm run test:demo",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "typecheck": "tsc --noEmit",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "predev": "npm run build:demo",
+    "build:demo": "vite build --config demo/vite.config.mjs",
+    "test:static": "node --experimental-strip-types --test tests/project-version.test.mjs tests/rendered-html.test.mjs tests/i18n.test.mjs tests/demo.test.mjs",
+    "test:demo": "node --test demo/tests/*.test.js"
   },
   "dependencies": {
     "embla-carousel-react": "^8.6.0",
@@ -30,7 +34,8 @@
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "4.2.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
   },
   "type": "module"
 }

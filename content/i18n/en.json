@@ -440,5 +440,18 @@
   "Windows-релиз": "Windows release",
   "{current} из {total}": "{current} of {total}",
   "Перейти к модулю {number}": "Go to module {number}",
-  "Windows charting for intensive care and the operating room": "Windows charting for intensive care and the operating room"
+  "Windows charting for intensive care and the operating room": "Windows charting for intensive care and the operating room",
+  "Демо": "Demo",
+  "Попробовать демо": "Try the demo",
+  "Интерактивное демо RemCard": "Interactive RemCard demo",
+  "Попробуйте назначения врача, отметки медсестры, витальные функции и баланс жидкости на учебной карте RemCard.": "Explore physician orders, nursing completion marks, vital signs and fluid balance in a fictional RemCard patient chart.",
+  "Перейти к демо": "Skip to the demo",
+  "На главную": "Home",
+  "Врач назначает — медсестра отмечает выполнение — общая карта обновляется.": "The physician places an order, the nurse records its completion, and the shared chart updates.",
+  "Открыть демо в отдельной вкладке": "Open the demo in a new tab",
+  "Об ограничениях демо": "Demo limitations",
+  "Демонстрационная версия · часть возможностей отключена": "Demo version · some features are disabled",
+  "Демо повторяет основные экраны текущей программы, но реализует лишь часть возможностей. Некоторые разделы отключены, а поведение может отличаться от полной версии. Все пациенты и события вымышлены; изменения сохраняются только в вашем браузере.": "This demo reproduces the main screens of the current application and implements only some of its features. Certain sections are disabled, and behavior may differ from the full version. All patients and events are fictional; changes are saved only in your browser.",
+  "Учебная реанимационная карта RemCard": "RemCard training ICU chart",
+  "Начните с назначения: введите препарат, затем откройте «Роли» и выберите медсестру. Левый клик отмечает выполнение, правый — невыполнение. Повторный клик снимает отметку.": "Start with an order: enter a medication, then open Roles and choose Nurse. Left-click to mark it as completed; right-click to mark it as not completed. Click again to remove the mark."
 }

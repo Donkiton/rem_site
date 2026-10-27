@@ -11,6 +11,7 @@ import { StatusBadge } from "@/components/ui/status-badge";
 import { PROJECT_LINKS } from "@/lib/links";
 import { GithubMark } from "@/components/icons/github-mark";
 import { SCREENSHOT_VERSION, screenshots } from "@/content/screenshots";
+import { withBasePath } from "@/lib/site-url";
 
 const vitals = [
   { label: "ЧСС", value: "78", unit: "уд/мин", tone: "red" },
@@ -20,7 +21,7 @@ const vitals = [
 ] as const;
 
 export function Hero() {
-  const { t } = useI18n();
+  const { t, l } = useI18n();
   const reduceMotion = useReducedMotion();
   const frameRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -50,7 +51,7 @@ export function Hero() {
             <PrimaryButton href={PROJECT_LINKS.repository} external>
               <GithubMark width={18} height={18} aria-hidden="true" />
               {t("Открыть проект на GitHub")}</PrimaryButton>
-            <SecondaryButton href="#features">{t("Посмотреть возможности")}</SecondaryButton>
+            <SecondaryButton href={l(withBasePath("/demo/"))}>{t("Попробовать демо")}</SecondaryButton>
             <GhostButton href="#interface">
               <LayoutPanelTop size={18} aria-hidden="true" />
               {t("Изучить интерфейс")}</GhostButton>
