@@ -15,6 +15,7 @@ import { LanguageSwitcher } from "@/components/layout/language-switcher";
 const navigation = [
   { label: "Возможности", href: withBasePath("/#features"), id: "features" },
   { label: "Интерфейс", href: withBasePath("/#interface"), id: "interface" },
+  { label: "Демо", href: withBasePath("/demo/") },
   { label: "Для кого", href: withBasePath("/#roles"), id: "roles" },
   { label: "Как устроено", href: withBasePath("/#architecture"), id: "architecture" },
   { label: "Исходный код", href: withBasePath("/#open-source"), id: "open-source" },

@@ -42,6 +42,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+/public/demo-app/
 
 # local font preparation sources; only the optimized .woff files are versioned
 /app/fonts/*.ttf

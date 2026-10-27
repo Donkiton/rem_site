@@ -440,5 +440,18 @@
   "Windows-релиз": "Windows-Version",
   "{current} из {total}": "{current} von {total}",
   "Перейти к модулю {number}": "Zu Modul {number}",
-  "Windows charting for intensive care and the operating room": "Patientendokumentation für Intensivstation und Operationsbereich"
+  "Windows charting for intensive care and the operating room": "Patientendokumentation für Intensivstation und Operationsbereich",
+  "Демо": "Demo",
+  "Попробовать демо": "Demo ausprobieren",
+  "Интерактивное демо RemCard": "Interaktive RemCard-Demo",
+  "Попробуйте назначения врача, отметки медсестры, витальные функции и баланс жидкости на учебной карте RemCard.": "Erproben Sie ärztliche Verordnungen, pflegerische Durchführungsmarkierungen, Vitalfunktionen und die Flüssigkeitsbilanz an einer fiktiven RemCard-Patientenakte.",
+  "Перейти к демо": "Zur Demo springen",
+  "На главную": "Startseite",
+  "Врач назначает — медсестра отмечает выполнение — общая карта обновляется.": "Der Arzt verordnet, die Pflege dokumentiert die Durchführung, und die gemeinsame Akte wird aktualisiert.",
+  "Открыть демо в отдельной вкладке": "Demo in einem neuen Tab öffnen",
+  "Об ограничениях демо": "Einschränkungen der Demo",
+  "Демонстрационная версия · часть возможностей отключена": "Demoversion · einige Funktionen sind deaktiviert",
+  "Демо повторяет основные экраны текущей программы, но реализует лишь часть возможностей. Некоторые разделы отключены, а поведение может отличаться от полной версии. Все пациенты и события вымышлены; изменения сохраняются только в вашем браузере.": "Diese Demo bildet die Hauptansichten des aktuellen Programms nach und setzt nur einen Teil seiner Funktionen um. Einige Bereiche sind deaktiviert; das Verhalten kann von der Vollversion abweichen. Alle Patienten und Ereignisse sind fiktiv. Änderungen werden ausschließlich in Ihrem Browser gespeichert.",
+  "Учебная реанимационная карта RemCard": "RemCard-Intensivkurve für Übungszwecke",
+  "Начните с назначения: введите препарат, затем откройте «Роли» и выберите медсестру. Левый клик отмечает выполнение, правый — невыполнение. Повторный клик снимает отметку.": "Beginnen Sie mit einer Verordnung: Geben Sie ein Medikament ein, öffnen Sie „Rollen“ und wählen Sie „Pflege“. Ein Linksklick markiert die Durchführung, ein Rechtsklick die Nichtdurchführung. Erneutes Klicken entfernt die Markierung."
 }

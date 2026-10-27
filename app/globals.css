@@ -1839,3 +1839,25 @@ button.architecture-node.active { border-color: rgba(8,182,212,.5); background: 
  .header-inner > .brand img { width:30px; height:30px; }
  .header-inner > .language-switcher .language-select { width:88px; }
 }
+
+/* Интерактивная учебная карта изолирована в iframe: стили приложения не
+   переопределяют оформление сайта, а язык задаётся текущим маршрутом. */
+.demo-page { max-width:1920px; margin:0 auto; padding:calc(var(--header-height) + 30px) clamp(16px,3vw,56px) 38px; }
+.demo-page-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:22px; }
+.demo-home-link { display:inline-block; font-size:13px; color:var(--text-secondary); margin-bottom:10px; }
+.demo-home-link:hover { color:var(--secondary); }
+.demo-page-heading h1 { font-size:clamp(25px,3vw,38px); line-height:1.2; }
+.demo-page-heading p { color:var(--text-secondary); font-size:14px; line-height:1.6; margin-top:10px; }
+.demo-page-heading > .button { flex-shrink:0; font-size:13px; }
+.demo-limitations-note { padding:13px 17px; margin-bottom:16px; border:1px solid #6d572a; border-left:3px solid #dba83c; border-radius:8px; background:#211d15; color:#d9d2c1; }
+.demo-limitations-note strong { color:#f0dca6; font-size:14px; font-weight:600; }
+.demo-limitations-note p { margin-top:5px; font-size:13px; line-height:1.65; }
+.demo-frame { display:block; width:100%; height:min(960px,calc(100svh - 140px)); min-height:650px; border:1px solid var(--border-light); border-radius:8px; background:#f8f9fa; color-scheme:light; }
+.demo-page-help { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:16px; }
+.demo-page-help p { max-width:1050px; font-size:13px; line-height:1.7; color:var(--text-secondary); }
+@media (max-width:760px) {
+  .demo-page-heading { align-items:stretch; flex-direction:column; gap:15px; }
+  .demo-page-heading > .button { align-self:flex-start; }
+  .demo-page-help { align-items:flex-start; flex-direction:column; gap:14px; }
+  .demo-frame { min-height:640px; }
+}

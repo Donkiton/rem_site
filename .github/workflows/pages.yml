@@ -34,12 +34,14 @@ jobs:
         run: npm run typecheck
       - name: Проверить код
         run: npm run lint
+      - name: Проверить модель демо
+        run: npm run test:demo
       - name: Собрать сайт
         run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Проверить статический результат
-        run: node --experimental-strip-types --test tests/project-version.test.mjs tests/rendered-html.test.mjs tests/i18n.test.mjs
+        run: npm run test:static
       - name: Настроить GitHub Pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
