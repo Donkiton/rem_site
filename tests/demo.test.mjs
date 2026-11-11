@@ -33,6 +33,9 @@ for (const locale of LOCALES) {
     assert.match(html, new RegExp(`<html[^>]*lang="${locale}"`));
     assert.ok(html.includes(t('Интерактивное демо RemCard')));
     assert.ok(html.includes(t('Демонстрационная версия · часть возможностей отключена')));
+    assert.ok(html.includes(t('Демо для компьютера')));
+    assert.ok(html.includes(t('Откройте эту страницу на ПК')));
+    assert.ok(home.includes(t('Демо для ПК')));
     assert.ok(html.includes(`src="${basePath}/demo-app/index.html?lang=${locale}"`));
     assert.ok(home.includes(`href="${basePath}/${prefix}demo/"`), 'доступ с главной текущего языка');
     for (const alternate of LOCALES) {

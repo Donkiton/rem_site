@@ -56,7 +56,7 @@ export default async function Home({ locale }: { locale: Locale }) {
       <a className="skip-link" href="#main-content">{t("Перейти к содержимому")}</a>
       <Header />
       <main id="main-content">
-        <Hero />
+        <Hero release={release} />
         <IntroSection />
         <SeoDirectorySection />
         <ComparisonSection />

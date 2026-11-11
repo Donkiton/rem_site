@@ -32,6 +32,8 @@ export type GitHubReleaseInfo = {
   name: string;
   url: string;
   downloadUrl: string | null;
+  installerUrl: string | null;
+  archiveUrl: string | null;
   prerelease: boolean;
   publishedAt: string;
 };
@@ -40,9 +42,11 @@ const CONFIRMED_RELEASE: GitHubReleaseInfo = {
   version: PROJECT_VERSION_FALLBACK,
   name: `RemCard ${PROJECT_VERSION_FALLBACK}`,
   url: `https://github.com/Donkiton/rem_card/releases/tag/v${PROJECT_VERSION_FALLBACK}`,
-  downloadUrl: null,
+  downloadUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard-Setup-${PROJECT_VERSION_FALLBACK}.exe`,
+  installerUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard-Setup-${PROJECT_VERSION_FALLBACK}.exe`,
+  archiveUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard_${PROJECT_VERSION_FALLBACK}_full.zip`,
   prerelease: false,
-  publishedAt: "2026-10-25",
+  publishedAt: "2026-11-09T06:07:59Z",
 };
 
 function githubHeaders() {
@@ -108,16 +112,20 @@ export async function getLatestGitHubRelease(): Promise<GitHubReleaseInfo> {
       return CONFIRMED_RELEASE;
     }
 
-    const assetUrl = release.assets?.find(
-      (asset) => typeof asset.browser_download_url === "string" &&
-        asset.browser_download_url.startsWith(`https://github.com/Donkiton/rem_card/releases/download/v${version}/`) &&
-        asset.browser_download_url.endsWith(".zip"),
-    )?.browser_download_url;
+    const assets = Array.isArray(release.assets) ? release.assets : [];
+    const assetUrl = (filename: string): string | null => {
+      const url = `https://github.com/Donkiton/rem_card/releases/download/v${version}/${filename}`;
+      return assets.some((asset) => asset?.browser_download_url === url) ? url : null;
+    };
+    const installerUrl = assetUrl(`RemCard-Setup-${version}.exe`);
+    const archiveUrl = assetUrl(`RemCard_${version}_full.zip`);
     return {
       version,
       name: release.name,
       url: release.html_url,
-      downloadUrl: typeof assetUrl === "string" ? assetUrl : null,
+      downloadUrl: installerUrl ?? archiveUrl,
+      installerUrl,
+      archiveUrl,
       prerelease: false,
       publishedAt: release.published_at,
     };

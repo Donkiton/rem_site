@@ -14,7 +14,7 @@
     "db:generate": "drizzle-kit generate",
     "predev": "npm run build:demo",
     "build:demo": "vite build --config demo/vite.config.mjs",
-    "test:static": "node --experimental-strip-types --test tests/project-version.test.mjs tests/rendered-html.test.mjs tests/i18n.test.mjs tests/demo.test.mjs",
+    "test:static": "node --experimental-strip-types --test tests/project-version.test.mjs tests/github-release.test.mjs tests/rendered-html.test.mjs tests/i18n.test.mjs tests/demo.test.mjs",
     "test:demo": "node --test demo/tests/*.test.js"
   },
   "dependencies": {

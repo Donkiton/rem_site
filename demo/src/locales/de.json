@@ -277,5 +277,9 @@
   "Показатели на {time} добавлены в карту.": "Vitalwerte von {time} wurden zur Karte hinzugefügt.",
   "Рабочее место: {role}. Открыта та же карта пациента.": "Arbeitsplatz: {role}. Dieselbe Patientenkarte ist geöffnet.",
   "РЕМКАРТА — ДЕМО": "REMCARD — DEMO",
-  "RemCard — интерактивное демо": "RemCard — interaktive Demo"
+  "RemCard — интерактивное демо": "RemCard — interaktive Demo",
+  "Демо для компьютера": "Demo für Computer",
+  "Откройте эту страницу на ПК": "Öffnen Sie diese Seite auf einem PC",
+  "Демо повторяет настольную карту пациента и рассчитано на большой экран и управление мышью. Откройте эту же ссылку на компьютере; рекомендуемая ширина окна — от 1280 пикселей.": "Die Demo bildet die Patientenkurve der Desktop-Version nach und ist für einen großen Bildschirm und Mausbedienung ausgelegt. Öffnen Sie denselben Link auf einem Computer; empfohlen wird eine Fensterbreite von mindestens 1280 Pixeln.",
+  "Вернуться на главную": "Zur Startseite"
 }

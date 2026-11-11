@@ -4,12 +4,11 @@ import { useI18n } from "@/components/i18n-provider";
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { LayoutPanelTop, MousePointer2 } from "lucide-react";
+import { Download, LayoutPanelTop, MousePointer2 } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import { PrimaryButton, SecondaryButton, GhostButton } from "@/components/ui/buttons";
 import { StatusBadge } from "@/components/ui/status-badge";
-import { PROJECT_LINKS } from "@/lib/links";
-import { GithubMark } from "@/components/icons/github-mark";
+import type { GitHubReleaseInfo } from "@/lib/github";
 import { SCREENSHOT_VERSION, screenshots } from "@/content/screenshots";
 import { withBasePath } from "@/lib/site-url";
 
@@ -20,7 +19,7 @@ const vitals = [
   { label: "Темп.", value: "36,7", unit: "°C", tone: "green" },
 ] as const;
 
-export function Hero() {
+export function Hero({ release }: { release: GitHubReleaseInfo }) {
   const { t, l } = useI18n();
   const reduceMotion = useReducedMotion();
   const frameRef = useRef<HTMLDivElement>(null);
@@ -48,14 +47,15 @@ export function Hero() {
           <p className="hero-description">
             {t("Приложение RemCard объединяет назначения, жизненно важные показатели, инфузионную терапию, ИВЛ, процедуры, лабораторные исследования, события операции и документы в едином рабочем пространстве.")}</p>
           <div className="hero-actions">
-            <PrimaryButton href={PROJECT_LINKS.repository} external>
-              <GithubMark width={18} height={18} aria-hidden="true" />
-              {t("Открыть проект на GitHub")}</PrimaryButton>
-            <SecondaryButton href={l(withBasePath("/demo/"))}>{t("Попробовать демо")}</SecondaryButton>
+            <PrimaryButton href={release.downloadUrl ?? release.url} external>
+              <Download size={18} aria-hidden="true" />
+              {t("Скачать для Windows {version}", { version: release.version })}</PrimaryButton>
+            <SecondaryButton href={l(withBasePath("/demo/"))}>{t("Демо для ПК")}</SecondaryButton>
             <GhostButton href="#interface">
               <LayoutPanelTop size={18} aria-hidden="true" />
               {t("Изучить интерфейс")}</GhostButton>
           </div>
+          <p className="hero-demo-note">{t("Браузерное демо рассчитано на ПК с мышью и большим экраном. На телефоне интерфейс не адаптирован.")}</p>
           <div className="hero-notes" aria-label={t("Ключевые особенности")}>
             <span>{t("Локальная сеть")}</span>
             <span>SQLite</span>
