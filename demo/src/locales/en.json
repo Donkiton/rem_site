@@ -277,5 +277,9 @@
   "Энтеральное питание": "Enteral nutrition",
   "№ истории": "Record no.",
   "RemCard — интерактивное демо": "RemCard — interactive demo",
-  "S. NaCl 0,9% — 10 мл, в/в струйно": "S. NaCl 0.9% — 10 mL, IV bolus"
+  "S. NaCl 0,9% — 10 мл, в/в струйно": "S. NaCl 0.9% — 10 mL, IV bolus",
+  "Демо для компьютера": "Desktop demo",
+  "Откройте эту страницу на ПК": "Open this page on a PC",
+  "Демо повторяет настольную карту пациента и рассчитано на большой экран и управление мышью. Откройте эту же ссылку на компьютере; рекомендуемая ширина окна — от 1280 пикселей.": "The demo recreates the desktop patient chart and is designed for a large screen and mouse controls. Open this same link on a computer; a window width of at least 1280 pixels is recommended.",
+  "Вернуться на главную": "Back to home"
 }

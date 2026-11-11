@@ -12,6 +12,7 @@ import {
   Clock3,
   Code2,
   Computer,
+  Download,
   FileClock,
   FolderSync,
   HeartHandshake,
@@ -237,7 +238,7 @@ export function OpenSourceSection({
 }) {
   const { t } = useI18n();
   const releaseUrl = release.url;
-  const releaseLabel = t("Скачать Windows-релиз {version}", { version: release.version });
+  const releaseLabel = t("Открыть страницу релиза {version}", { version: release.version });
   return (
     <section id="open-source" className="section open-source-section" aria-labelledby="open-source-title">
       <div className="site-container open-source-layout">
@@ -251,13 +252,18 @@ export function OpenSourceSection({
           />
           <p className="release-summary">
             <strong>{t("Версия {version}.", { version: release.version })}</strong>{" "}
-            {release.version === "5.1.12" ? (
+            {release.version === "5.1.16" ? (
               <>
-                {t("В релизе от 25 октября 2026 года исправлено поле даты и времени поступления: значения полностью видны, календарь и редактирование времени работают в светлой и тёмной темах. Обновление 5.1.12 необязательное для клиентов 5.1.11: схема общей базы остаётся 28, минимальная версия клиента — 5.1.11. Миграции общей базы и повышение минимальной версии в этой сборке отключены.")} </>
+                {t("В версии 5.1.16 открытие карты, добавление пациента и переход в аварийный режим выполняются без блокировки интерфейса. Улучшена диагностика задержек и ошибок доступа к базе. Установщик поддерживает русский и английский языки.")} </>
             ) : (
               <>{t("Описание изменений и требования к установке опубликованы на странице этого релиза.")}</>
             )}
           </p>
+          {release.version === "5.1.16" ? <p className="release-summary">{t("Обновление 5.1.16 не меняет схему общей базы 29 и минимальную версию клиента 5.1.15. Перед первым запуском закройте прежние клиенты.")}</p> : null}
+          <div className="open-source-actions release-downloads">
+            {release.installerUrl ? <PrimaryButton href={release.installerUrl} external><Download size={17} aria-hidden="true" />{t("Скачать установщик {version}", { version: release.version })}</PrimaryButton> : null}
+            {release.archiveUrl ? <SecondaryButton href={release.archiveUrl} external>{t("Скачать полный ZIP {version}", { version: release.version })}</SecondaryButton> : null}
+          </div>
           <div className="open-source-actions">
             <PrimaryButton href={PROJECT_LINKS.repository} external><Star size={17} aria-hidden="true" />{t("Поставить звезду")}</PrimaryButton>
             <SecondaryButton href={PROJECT_LINKS.repository} external><GithubMark width={17} height={17} aria-hidden="true" />{t("Открыть репозиторий")}</SecondaryButton>
@@ -282,7 +288,8 @@ export function StorySection() {
         <Reveal className="story-copy" delay={0.06}>
           <SectionHeading id="story-title" eyebrow={t("История проекта")} title={t("Создан из реального рабочего контекста")} />
           <blockquote>
-            {t("RemCard создаётся практикующим врачом анестезиологом-реаниматологом. Проект появился из необходимости уменьшить повторное заполнение документов, объединить информацию о пациенте и сделать рабочий процесс отделения более наглядным.")} </blockquote>
+            {t("Автор и разработчик RemCard — Вадим Битюцкий, практикующий врач анестезиолог-реаниматолог. Я развиваю программу, чтобы уменьшить повторное заполнение документов, объединить информацию о пациенте и сделать работу отделения нагляднее.")} </blockquote>
+          <p>{t("ИИ помогает мне разбирать отдельные технические вопросы и ускорять некоторые этапы разработки.")}</p>
           <p>{t("Проект открыт для проверки и помощи. На сайте не приводятся неподтверждённые данные о внедрениях, организациях или количестве пользователей.")}</p>
           <div className="builder-directory">
             <a href={PROJECT_LINKS.clinicianDirectory} target="_blank" rel="noreferrer">

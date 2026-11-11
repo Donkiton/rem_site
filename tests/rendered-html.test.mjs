@@ -17,12 +17,12 @@ test("статическая сборка содержит русскую пре
   assert.match(html, /Программа для ОРИТ/);
   assert.match(html, /Операционный блок/);
   assert.match(html, /RemCard развивается публично/);
-  if (html.includes('"softwareVersion":"5.1.12"')) {
-    assert.match(html, /25 октября 2026 года/);
-    assert.match(html, /исправлено поле даты и времени поступления/);
-    assert.match(html, /Обновление 5\.1\.12 необязательное для клиентов 5\.1\.11/);
-    assert.match(html, /схема общей базы остаётся 28/);
-    assert.match(html, /минимальная версия клиента — 5\.1\.11/);
+  if (html.includes('"softwareVersion":"5.1.16"')) {
+    assert.match(html, /Установщик поддерживает русский и английский языки/);
+    assert.match(html, /диагностика задержек и ошибок доступа к базе/);
+    assert.match(html, /Обновление 5\.1\.16 не меняет/);
+    assert.match(html, /схему общей базы 29/);
+    assert.match(html, /минимальную версию клиента 5\.1\.15/);
   } else {
     assert.match(html, /Описание изменений и требования к установке опубликованы на странице этого релиза/);
     assert.doesNotMatch(html, /Обновление 5\.1\.12 необязательное/);
@@ -49,8 +49,14 @@ test("версия галереи, подвала и ссылки релиза �
   assert.match(html, new RegExp(`class="footer-version">Версия(?:<!-- -->|\\s)*${escapedVersion}<`));
   assert.match(html, new RegExp(`<strong>Версия(?:<!-- -->|\\s)*${escapedVersion}(?:<!-- -->)*\\.</strong>`));
   assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/tag/v${version}"`));
-  assert.ok(html.includes(`Скачать Windows-релиз ${version}`));
-  assert.doesNotMatch(html, /href="https:\/\/github\.com\/Donkiton\/rem_card\/releases\/tag\/v5\.1\.(?:[689]|10|11)"/);
+  assert.ok(html.includes(`Открыть страницу релиза ${version}`));
+  assert.ok(html.includes(`Скачать для Windows ${version}`));
+  assert.doesNotMatch(html, /href="https:\/\/github\.com\/Donkiton\/rem_card\/releases\/tag\/v5\.1\.(?:[689]|10|11|12|13|14|15)"/);
+  if (version === "5.1.16") {
+    assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/download/v${version}/RemCard-Setup-${version}.exe"`));
+    assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/download/v${version}/RemCard_${version}_full.zip"`));
+    assert.ok(html.includes(`"downloadUrl":"https://github.com/Donkiton/rem_card/releases/download/v${version}/RemCard-Setup-${version}.exe"`));
+  }
 });
 
 test("ключевые разделы и ссылки присутствуют в HTML", async () => {

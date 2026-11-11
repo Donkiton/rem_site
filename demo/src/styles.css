@@ -225,6 +225,12 @@ h1, h2, h3, p { margin: 0; }
 .native-template-list > button { border: 1px solid #ccd4db; background: #fff; text-align: left; border-radius: 3px; padding: 10px; }
 .native-template-list > button:hover { background: #eaf2fc; }
 .native-template-list small { display: block; margin-top: 5px; color: #708092; }
+.demo-desktop-notice { max-width: 600px; margin: 12dvh auto; padding: 28px 24px; font-size: 16px; line-height: 1.65; }
+.demo-desktop-notice h1 { margin: 12px 0 20px; font-size: 28px; line-height: 1.25; }
+.demo-desktop-label { color: #0056b3; font-weight: 600; }
+.demo-desktop-notice a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 24px; padding: 8px 16px; color: #0056b3; border: 1px solid #8aafda; border-radius: 5px; text-decoration: none; }
+.demo-desktop-notice a:hover { background: #e8f1fd; }
+.demo-desktop-notice a:focus-visible { outline: 2px solid #0056b3; outline-offset: 3px; }
 .skip-link { position: fixed; transform: translateY(-180%); background: #fff; padding: 10px; z-index: 20; color: #0056b3; }
 .skip-link:focus { transform: translateY(0); }
 @media (max-width: 1550px) { .patient-info-line { gap: 12px; font-size: 11px; } .admission-status { min-width: 160px; } .patient-card-actions { gap: 5px; } .patient-card-actions .qt-button { font-size: 11px; padding: 3px 7px; } .vital-chips { gap: 4px; } .vital-chip { padding: 3px 7px; } .native-shift-heading { gap: 20px; } .native-toolbar .qt-button { font-size: 12px; padding: 3px 9px; } .native-tab-buttons { gap: 7px; } .native-tab-buttons .qt-button { padding: 3px 10px; } .balance-main-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 180px; } .balance-main-top .balance-rail-total { font-size: 11px; } }

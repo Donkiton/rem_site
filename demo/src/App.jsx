@@ -15,7 +15,7 @@ catch {
 } }
 const TABS = [{ id: 'vitals', name: 'Витальные функции' }, { id: 'orders', name: 'Назначения' }, { id: 'balance', name: 'Баланс жидкости' }];
 export default function App() {
-    const { t, tr } = useDemoI18n();
+    const { t, tr, locale } = useDemoI18n();
     const [state, setState] = useState(() => loadState(storage()));
     const [dialog, setDialog] = useState(null);
     const [selectedOrderId, setSelectedOrderId] = useState(null);
@@ -58,6 +58,12 @@ export default function App() {
         update((current) => setTab(current, 'orders'));
     } }
     function activateTab(tab) { update((current) => setTab(current, tab)); }
+    if (viewport.width < 1024) return <main className="demo-desktop-notice">
+      <p className="demo-desktop-label">{t('Демо для компьютера')}</p>
+      <h1>{t('Откройте эту страницу на ПК')}</h1>
+      <p>{t('Демо повторяет настольную карту пациента и рассчитано на большой экран и управление мышью. Откройте эту же ссылку на компьютере; рекомендуемая ширина окна — от 1280 пикселей.')}</p>
+      <a href={`../${locale === 'ru' ? '' : `${locale}/`}`}>{t('Вернуться на главную')}</a>
+    </main>;
     return <div className="native-window" style={{ zoom: scale, width: `${viewport.width / scale}px`, height: `${viewport.height / scale}px` }}>
     <a className="skip-link" href="#native-content">{t("К реанимационной карте")}</a>
     <TopToolbar role={state.role} onRoles={() => setDialog({ type: 'roles' })} onPatients={() => setDialog({ type: 'patients' })} onRefresh={() => setNotice('Карта обновлена. Все изменения доступны обоим рабочим местам.')} onReset={() => setDialog({ type: 'reset' })}/>
