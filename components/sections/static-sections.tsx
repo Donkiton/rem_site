@@ -252,14 +252,14 @@ export function OpenSourceSection({
           />
           <p className="release-summary">
             <strong>{t("Версия {version}.", { version: release.version })}</strong>{" "}
-            {release.version === "5.1.16" ? (
+            {release.version === "5.1.20" ? (
               <>
-                {t("В версии 5.1.16 открытие карты, добавление пациента и переход в аварийный режим выполняются без блокировки интерфейса. Улучшена диагностика задержек и ошибок доступа к базе. Установщик поддерживает русский и английский языки.")} </>
+                {t("В версии 5.1.20 ограничено ожидание очереди и SQLite при добавлении и изменении пациента: общий бюджет — 15 секунд. Зависший сетевой вызов может занять больше времени. Улучшено освобождение ресурсов базы после ошибок и добавлена локальная диагностика блокировок без медицинских данных. Установщик поддерживает русский и английский языки.")} </>
             ) : (
               <>{t("Описание изменений и требования к установке опубликованы на странице этого релиза.")}</>
             )}
           </p>
-          {release.version === "5.1.16" ? <p className="release-summary">{t("Обновление 5.1.16 не меняет схему общей базы 29 и минимальную версию клиента 5.1.15. Перед первым запуском закройте прежние клиенты.")}</p> : null}
+          {release.version === "5.1.20" ? <p className="release-summary">{t("Обновление 5.1.20 не меняет схему общей базы 29 и минимальную версию клиента 5.1.15. Перед первым запуском закройте прежние клиенты.")}</p> : null}
           <div className="open-source-actions release-downloads">
             {release.installerUrl ? <PrimaryButton href={release.installerUrl} external><Download size={17} aria-hidden="true" />{t("Скачать установщик {version}", { version: release.version })}</PrimaryButton> : null}
             {release.archiveUrl ? <SecondaryButton href={release.archiveUrl} external>{t("Скачать полный ZIP {version}", { version: release.version })}</SecondaryButton> : null}

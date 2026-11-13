@@ -46,7 +46,7 @@ const CONFIRMED_RELEASE: GitHubReleaseInfo = {
   installerUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard-Setup-${PROJECT_VERSION_FALLBACK}.exe`,
   archiveUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard_${PROJECT_VERSION_FALLBACK}_full.zip`,
   prerelease: false,
-  publishedAt: "2026-11-09T06:07:59Z",
+  publishedAt: "2026-11-13T08:48:07Z",
 };
 
 function githubHeaders() {
