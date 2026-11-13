@@ -1,10 +1,27 @@
-export const PROJECT_VERSION_FALLBACK = "5.1.20";
+import publicRelease from "../content/public-release.json" with { type: "json" };
 
-const PROJECT_VERSION_PATTERN = /^\d+\.\d+\.\d+$/;
+export type PublicReleaseChanges = Partial<Record<"ru" | "en" | "de" | "ja" | "zh-CN", string[]>>;
+
+export const PUBLIC_RELEASE_SNAPSHOT: {
+  schema_version: number;
+  version: string;
+  tag_name: string;
+  published_at: string;
+  release_url: string;
+  installer_url: string;
+  archive_url: string;
+  checksums_url: string;
+  source_commit: string;
+  documentation_commit?: string | null;
+  changes: PublicReleaseChanges;
+} = publicRelease;
+export const PROJECT_VERSION_FALLBACK = PUBLIC_RELEASE_SNAPSHOT.version;
+
+const PROJECT_VERSION_PATTERN = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/;
 
 export function normalizeProjectVersion(value: string): string | null {
   const version = value.trim().replace(/^v/i, "");
-  return PROJECT_VERSION_PATTERN.test(version) ? version : null;
+  return PROJECT_VERSION_PATTERN.test(version) && version.split(".").every((part) => Number.isSafeInteger(Number(part))) ? version : null;
 }
 
 export function selectPublishedProjectVersion(candidate: {

@@ -1,36 +1,28 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { selectPublishedProjectVersion } from "../lib/project-version.ts";
+import { PROJECT_VERSION_FALLBACK, selectPublishedProjectVersion } from "../lib/project-version.ts";
 
 const stable = (tag_name) => ({ tag_name, prerelease: false, draft: false });
+const [major, minor, patch] = PROJECT_VERSION_FALLBACK.split(".").map(Number);
+const previous = patch > 0 ? `${major}.${minor}.${patch - 1}` : minor > 0 ? `${major}.${minor - 1}.0` : `${major - 1}.0.0`;
+const future = `${major}.${minor}.${patch + 1}`;
 
-test("устаревший релиз не понижает подтверждённую версию 5.1.20", () => {
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.6")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.9")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.10")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.11")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.12")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.13")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.14")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.15")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.16")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.17")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.18")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.19")), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.20")), "5.1.20");
+test("устаревший релиз не понижает подтверждённую версию из metadata", () => {
+  assert.equal(selectPublishedProjectVersion(stable(`v${previous}`)), null);
+  assert.equal(selectPublishedProjectVersion(stable(`v${PROJECT_VERSION_FALLBACK}`)), PROJECT_VERSION_FALLBACK);
 });
 
-test("сравнение стабильных версий принимает будущую 5.1.21 численно", () => {
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.21")), "5.1.21");
-  assert.equal(selectPublishedProjectVersion(stable("v5.2.0")), "5.2.0");
-  assert.equal(selectPublishedProjectVersion(stable("v6.0.0")), "6.0.0");
-  assert.equal(selectPublishedProjectVersion(stable("v5.0.99")), null);
+test("сравнение стабильных версий принимает новые patch, minor и major численно", () => {
+  for (const version of [future, `${major}.${minor + 1}.0`, `${major + 1}.0.0`]) {
+    assert.equal(selectPublishedProjectVersion(stable(`v${version}`)), version);
+  }
 });
 
 test("черновики, prerelease и неполные ответы не задают текущую версию", () => {
-  assert.equal(selectPublishedProjectVersion({ ...stable("v5.1.21"), draft: true }), null);
-  assert.equal(selectPublishedProjectVersion({ ...stable("v5.1.21"), prerelease: true }), null);
-  assert.equal(selectPublishedProjectVersion(stable("v5.1.21-beta.1")), null);
-  assert.equal(selectPublishedProjectVersion({ tag_name: "v5.1.21" }), null);
+  assert.equal(selectPublishedProjectVersion({ ...stable(`v${future}`), draft: true }), null);
+  assert.equal(selectPublishedProjectVersion({ ...stable(`v${future}`), prerelease: true }), null);
+  assert.equal(selectPublishedProjectVersion(stable(`v${future}-beta.1`)), null);
+  assert.equal(selectPublishedProjectVersion({ tag_name: `v${future}` }), null);
   assert.equal(selectPublishedProjectVersion(stable("unknown")), null);
+  assert.equal(selectPublishedProjectVersion(stable("v05.1.1")), null);
 });

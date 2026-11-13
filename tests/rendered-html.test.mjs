@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { selectPublishedProjectVersion } from "../lib/project-version.ts";
+import { PUBLIC_RELEASE_SNAPSHOT, selectPublishedProjectVersion } from "../lib/project-version.ts";
 
 async function render() {
   return readFile(new URL("../out/index.html", import.meta.url), "utf8");
@@ -17,17 +17,13 @@ test("статическая сборка содержит русскую пре
   assert.match(html, /Программа для ОРИТ/);
   assert.match(html, /Операционный блок/);
   assert.match(html, /RemCard развивается публично/);
-  if (html.includes('"softwareVersion":"5.1.20"')) {
-    assert.match(html, /Установщик поддерживает русский и английский языки/);
-    assert.match(html, /общий бюджет — 15 секунд/);
-    assert.match(html, /Зависший сетевой вызов может занять больше времени/);
-    assert.match(html, /локальная диагностика блокировок без медицинских данных/);
-    assert.match(html, /Обновление 5\.1\.20 не меняет/);
-    assert.match(html, /схему общей базы 29/);
-    assert.match(html, /минимальную версию клиента 5\.1\.15/);
+  const version = html.match(/"softwareVersion":"(\d+\.\d+\.\d+)"/)?.[1];
+  const releaseSection = html.match(/<section id="open-source"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const escapeHtml = (text) => text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#x27;");
+  if (version === PUBLIC_RELEASE_SNAPSHOT.version) {
+    for (const note of PUBLIC_RELEASE_SNAPSHOT.changes.ru) assert.ok(releaseSection.includes(escapeHtml(note)), "notes опубликованного snapshot видны на странице");
   } else {
-    assert.match(html, /Описание изменений и требования к установке опубликованы на странице этого релиза/);
-    assert.doesNotMatch(html, /Обновление 5\.1\.12 необязательное/);
+    assert.match(releaseSection, /Описание изменений и требования к установке опубликованы на странице этого релиза/);
   }
   assert.doesNotMatch(html, /sync_failed/);
   assert.doesNotMatch(html, /27(?:×|x|\s*раз)/i);
@@ -53,8 +49,7 @@ test("версия галереи, подвала и ссылки релиза �
   assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/tag/v${version}"`));
   assert.ok(html.includes(`Открыть страницу релиза ${version}`));
   assert.ok(html.includes(`Скачать для Windows ${version}`));
-  assert.doesNotMatch(html, /href="https:\/\/github\.com\/Donkiton\/rem_card\/releases\/tag\/v5\.1\.(?:[689]|1[0-9])"/);
-  if (version === "5.1.20") {
+  if (version === PUBLIC_RELEASE_SNAPSHOT.version) {
     assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/download/v${version}/RemCard-Setup-${version}.exe"`));
     assert.ok(html.includes(`href="https://github.com/Donkiton/rem_card/releases/download/v${version}/RemCard_${version}_full.zip"`));
     assert.ok(html.includes(`"downloadUrl":"https://github.com/Donkiton/rem_card/releases/download/v${version}/RemCard-Setup-${version}.exe"`));

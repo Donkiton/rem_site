@@ -236,7 +236,8 @@ export function OpenSourceSection({
   metrics: GitHubMetrics;
   release: GitHubReleaseInfo;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const notes = release.changes?.[locale];
   const releaseUrl = release.url;
   const releaseLabel = t("Открыть страницу релиза {version}", { version: release.version });
   return (
@@ -250,16 +251,12 @@ export function OpenSourceSection({
             title={t("RemCard развивается публично")}
             description={t("Исходный код доступен на GitHub по RemCard Proprietary Source License 1.1. Физические лица могут изучать, изменять и использовать проект некоммерчески; организационное и коммерческое использование требует письменного разрешения.")}
           />
-          <p className="release-summary">
-            <strong>{t("Версия {version}.", { version: release.version })}</strong>{" "}
-            {release.version === "5.1.20" ? (
-              <>
-                {t("В версии 5.1.20 ограничено ожидание очереди и SQLite при добавлении и изменении пациента: общий бюджет — 15 секунд. Зависший сетевой вызов может занять больше времени. Улучшено освобождение ресурсов базы после ошибок и добавлена локальная диагностика блокировок без медицинских данных. Установщик поддерживает русский и английский языки.")} </>
-            ) : (
-              <>{t("Описание изменений и требования к установке опубликованы на странице этого релиза.")}</>
-            )}
-          </p>
-          {release.version === "5.1.20" ? <p className="release-summary">{t("Обновление 5.1.20 не меняет схему общей базы 29 и минимальную версию клиента 5.1.15. Перед первым запуском закройте прежние клиенты.")}</p> : null}
+          <p className="release-summary"><strong>{t("Версия {version}.", { version: release.version })}</strong></p>
+          {notes?.length ? (
+            <ul className="release-summary">{notes.map((note, index) => <li key={`${index}-${note}`}>{note}</li>)}</ul>
+          ) : (
+            <p className="release-summary"><a href={releaseUrl} target="_blank" rel="noreferrer">{t("Описание изменений и требования к установке опубликованы на странице этого релиза.")}</a></p>
+          )}
           <div className="open-source-actions release-downloads">
             {release.installerUrl ? <PrimaryButton href={release.installerUrl} external><Download size={17} aria-hidden="true" />{t("Скачать установщик {version}", { version: release.version })}</PrimaryButton> : null}
             {release.archiveUrl ? <SecondaryButton href={release.archiveUrl} external>{t("Скачать полный ZIP {version}", { version: release.version })}</SecondaryButton> : null}

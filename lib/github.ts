@@ -1,4 +1,4 @@
-import { PROJECT_VERSION_FALLBACK, selectPublishedProjectVersion } from "@/lib/project-version";
+import { PUBLIC_RELEASE_SNAPSHOT, selectPublishedProjectVersion, type PublicReleaseChanges } from "@/lib/project-version";
 
 export type GitHubMetrics =
   | {
@@ -34,19 +34,23 @@ export type GitHubReleaseInfo = {
   downloadUrl: string | null;
   installerUrl: string | null;
   archiveUrl: string | null;
+  checksumsUrl: string | null;
+  changes: PublicReleaseChanges | null;
   prerelease: boolean;
   publishedAt: string;
 };
 
 const CONFIRMED_RELEASE: GitHubReleaseInfo = {
-  version: PROJECT_VERSION_FALLBACK,
-  name: `RemCard ${PROJECT_VERSION_FALLBACK}`,
-  url: `https://github.com/Donkiton/rem_card/releases/tag/v${PROJECT_VERSION_FALLBACK}`,
-  downloadUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard-Setup-${PROJECT_VERSION_FALLBACK}.exe`,
-  installerUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard-Setup-${PROJECT_VERSION_FALLBACK}.exe`,
-  archiveUrl: `https://github.com/Donkiton/rem_card/releases/download/v${PROJECT_VERSION_FALLBACK}/RemCard_${PROJECT_VERSION_FALLBACK}_full.zip`,
+  version: PUBLIC_RELEASE_SNAPSHOT.version,
+  name: `RemCard ${PUBLIC_RELEASE_SNAPSHOT.version}`,
+  url: PUBLIC_RELEASE_SNAPSHOT.release_url,
+  downloadUrl: PUBLIC_RELEASE_SNAPSHOT.installer_url,
+  installerUrl: PUBLIC_RELEASE_SNAPSHOT.installer_url,
+  archiveUrl: PUBLIC_RELEASE_SNAPSHOT.archive_url,
+  checksumsUrl: PUBLIC_RELEASE_SNAPSHOT.checksums_url,
+  changes: PUBLIC_RELEASE_SNAPSHOT.changes,
   prerelease: false,
-  publishedAt: "2026-11-13T08:48:07Z",
+  publishedAt: PUBLIC_RELEASE_SNAPSHOT.published_at,
 };
 
 function githubHeaders() {
@@ -126,6 +130,8 @@ export async function getLatestGitHubRelease(): Promise<GitHubReleaseInfo> {
       downloadUrl: installerUrl ?? archiveUrl,
       installerUrl,
       archiveUrl,
+      checksumsUrl: assetUrl("SHA256SUMS.txt"),
+      changes: version === PUBLIC_RELEASE_SNAPSHOT.version ? PUBLIC_RELEASE_SNAPSHOT.changes : null,
       prerelease: false,
       publishedAt: release.published_at,
     };
