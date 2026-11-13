@@ -8,7 +8,7 @@
   "archive_url": "https://github.com/Donkiton/rem_card/releases/download/v5.1.20/RemCard_5.1.20_full.zip",
   "checksums_url": "https://github.com/Donkiton/rem_card/releases/download/v5.1.20/SHA256SUMS.txt",
   "source_commit": "ea50c02bbdb05f5c64c280817a7e406718629773",
-  "documentation_commit": null,
+  "documentation_commit": "f1aba910a1b303e8684081b923cd6daa9e2bfd9b",
   "changes": {
     "ru": [
       "Ограничено ожидание добавления и изменения пациента единым бюджетом 15 секунд без повторного выполнения записи с неизвестным результатом",
