@@ -1,4 +1,4 @@
-export const PROJECT_VERSION_FALLBACK = "5.1.16";
+export const PROJECT_VERSION_FALLBACK = "5.1.20";
 
 const PROJECT_VERSION_PATTERN = /^\d+\.\d+\.\d+$/;
 
